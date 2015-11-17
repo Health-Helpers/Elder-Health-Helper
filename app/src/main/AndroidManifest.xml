@@ -16,14 +16,16 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".responsible.MainActivity"
-            android:label="@string/title_activity_main" >
+        <activity android:name=".responsible.MainActivity" >
         </activity>
-        <activity
-            android:name=".patient.MainActivity"
-            android:label="@string/title_activity_main" >
+        <activity android:name=".patient.MainActivity" >
         </activity>
+
+        <receiver android:name=".sms.SMSReceiver">
+            <intent-filter>
+                <action android:name="android.provider.Telephony.SMS_RECEIVED"/>
+            </intent-filter>
+        </receiver>
     </application>
 
 </manifest>
