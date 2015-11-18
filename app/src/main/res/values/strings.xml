@@ -3,4 +3,5 @@
     <string name="settings">Ajustes</string>
     <string name="pair">Emparejar Botón</string>
     <string name="call">Llamar</string>
+    <string name="phone_number">654321123</string>
 </resources>
