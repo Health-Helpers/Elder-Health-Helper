@@ -10,15 +10,22 @@
         <activity
             android:name=".LoginActivity"
             android:label="@string/app_name" >
+
+          <!--  <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>-->
+
+        </activity>
+        <activity android:name=".responsible.MainActivity" >
+        </activity>
+        <activity android:name=".patient.MainActivity" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>
-        <activity android:name=".responsible.MainActivity" >
-        </activity>
-        <activity android:name=".patient.MainActivity" >
         </activity>
 
         <receiver android:name=".sms.SMSReceiver">
