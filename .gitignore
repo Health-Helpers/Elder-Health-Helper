@@ -28,3 +28,6 @@ proguard/
 .idea
 # Windows thumbnail db
 Thumbs.db
+
+# Ignore Idea files
+.idea/
