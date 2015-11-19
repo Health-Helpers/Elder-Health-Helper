@@ -11,7 +11,7 @@ import android.widget.TextView;
 import com.android.volley.VolleyError;
 
 import health.com.elderhealthhelper.networking.WebServiceConnection;
-import health.com.elderhealthhelper.sms.SmSReceiver;
+import health.com.elderhealthhelper.sms.SMSReceiver;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -47,7 +47,7 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     protected void onNewIntent(Intent intent) {
         Bundle extras = intent.getExtras();
-        String sms = extras.getString(SmSReceiver.SMS);
+        String sms = extras.getString(SMSReceiver.SMS);
         checkSmsCode(sms);
     }
 
