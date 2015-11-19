@@ -4,4 +4,25 @@
     <string name="pair">Emparejar Botón</string>
     <string name="call">Llamar</string>
     <string name="phone_number">654321123</string>
+
+
+    <string-array name="patients_array">
+        <item>Patient 1</item>
+        <item>Patient 2</item>
+        <item>Patient 3</item>
+        <item>Patient 4</item>
+        <item>Patient 5</item>
+        <item>Patient 6</item>
+        <item>Patient 7</item>
+        <item>Patient 8</item>
+    </string-array>
+
+    <string name="drawer_open">Open navigation drawer</string>
+    <string name="drawer_close">Close navigation drawer</string>
+    <string name="action_websearch">Web search</string>
+    <string name="app_not_available">Sorry, there\'s no web browser available</string>
+
+    <string name="locatePatient">Localizar paciente</string>
+
+    <string name="patientSettings">Ajustes Paciente</string>
 </resources>
