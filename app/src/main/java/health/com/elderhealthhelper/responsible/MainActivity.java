@@ -4,33 +4,20 @@ import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.SearchManager;
-import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
-
-import com.google.android.gms.maps.CameraUpdateFactory;
-import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.MapView;
-import com.google.android.gms.maps.MapsInitializer;
-import com.google.android.gms.maps.model.BitmapDescriptorFactory;
-import com.google.android.gms.maps.model.CameraPosition;
-import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.MarkerOptions;
 
 import health.com.elderhealthhelper.R;
 
@@ -181,129 +168,7 @@ public class MainActivity extends Activity {
         mDrawerToggle.onConfigurationChanged(newConfig);
     }
 
-    /**
-     * Fragment that appears in the "content_frame", shows a patient
-     */
-    public static class PatientFragment extends Fragment {
-        public static final String ARG_PATIENT_NUMBER = "patient_number";
-        public static FragmentManager fragmentManager;
-
-        public PatientFragment() {
-            // Empty constructor required for fragment subclasses
-        }
-
-        @Override
-        public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-            View rootView = inflater.inflate(R.layout.responsible_patient_fragment, container, false);
-            int i = getArguments().getInt(ARG_PATIENT_NUMBER);
-           String patient = getResources().getStringArray(R.array.patients_array)[i];
 
 
-            // initialising the object of the FragmentManager. Here I'm passing getSupportFragmentManager(). You can pass getFragmentManager() if you are coding for Android 3.0 or above.
-            fragmentManager = getFragmentManager();
 
-            Button locatePatientBtn = (Button) rootView.findViewById(R.id.localizePatientBtn);
-            locatePatientBtn.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-
-                    Context context = v.getContext();
-
-                    Fragment fragment = new PatientMapFragment();
-
-                    FragmentManager fragmentManager = getFragmentManager();
-                    fragmentManager.beginTransaction().replace(R.id.content_frame, fragment).commit();
-
-                    Toast.makeText(context, "Locate Pressed", Toast.LENGTH_SHORT).show();
-
-                }
-            });
-
-
-            getActivity().setTitle(patient);
-            return rootView;
-        }
-    }
-
-    public static class PatientMapFragment extends Fragment {
-
-
-        /**
-         * Note that this may be null if the Google Play services APK is not
-         * available.
-         */
-
-        MapView mMapView;
-        private GoogleMap googleMap;
-
-
-        public PatientMapFragment() {
-            // Empty constructor required for fragment subclasses
-        }
-
-        @Override
-        public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                                 Bundle savedInstanceState) {
-            // inflat and return the layout
-            View v = inflater.inflate(R.layout.responsible_patient_map, container,
-                    false);
-            mMapView = (MapView) v.findViewById(R.id.location_map);
-            mMapView.onCreate(savedInstanceState);
-
-            mMapView.onResume();// needed to get the map to display immediately
-
-            try {
-                MapsInitializer.initialize(getActivity().getApplicationContext());
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-
-            googleMap = mMapView.getMap();
-            // latitude and longitude
-            double latitude = 41.618341;
-            double longitude = 0.6024253;
-
-            // create marker
-            MarkerOptions marker = new MarkerOptions().position(
-                    new LatLng(latitude, longitude)).title("Hello Maps");
-
-            // Changing marker icon
-            marker.icon(BitmapDescriptorFactory
-                    .defaultMarker(BitmapDescriptorFactory.HUE_ROSE));
-
-            // adding marker
-            googleMap.addMarker(marker);
-            CameraPosition cameraPosition = new CameraPosition.Builder()
-                    .target(new LatLng(latitude, longitude)).zoom(12).build();
-            googleMap.animateCamera(CameraUpdateFactory
-                    .newCameraPosition(cameraPosition));
-
-            // Perform any camera updates here
-            return v;
-        }
-
-        @Override
-        public void onResume() {
-            super.onResume();
-            mMapView.onResume();
-        }
-
-        @Override
-        public void onPause() {
-            super.onPause();
-            mMapView.onPause();
-        }
-
-        @Override
-        public void onDestroy() {
-            super.onDestroy();
-            mMapView.onDestroy();
-        }
-
-        @Override
-        public void onLowMemory() {
-            super.onLowMemory();
-            mMapView.onLowMemory();
-        }
-    }
 }
