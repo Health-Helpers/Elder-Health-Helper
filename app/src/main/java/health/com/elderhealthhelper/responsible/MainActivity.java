@@ -227,8 +227,7 @@ public class MainActivity extends Activity {
 
     public static class PatientMapFragment extends Fragment {
 
-        private static View view;
-        public static FragmentManager fragmentManager;
+
         /**
          * Note that this may be null if the Google Play services APK is not
          * available.
@@ -236,10 +235,7 @@ public class MainActivity extends Activity {
 
         MapView mMapView;
         private GoogleMap googleMap;
-        private static GoogleMap mMap;
-        private static Double latitude, longitude;
 
-        public static final String ARG_PATIENT_NUMBER = "patient_number";
 
         public PatientMapFragment() {
             // Empty constructor required for fragment subclasses
