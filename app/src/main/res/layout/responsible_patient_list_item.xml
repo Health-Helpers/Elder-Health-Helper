@@ -1,13 +1,10 @@
-
 <TextView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@android:id/text1"
-    android:icon="@drawable/person"
+    android:id="@+id/simple_text_view"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:textAppearance="?android:attr/textAppearanceListItemSmall"
+    android:layout_height="50dp"
     android:gravity="center_vertical"
-    android:paddingLeft="16dp"
-    android:paddingRight="16dp"
-    android:textColor="#fff"
-    android:background="?android:attr/activatedBackgroundIndicator"
-    android:minHeight="?android:attr/listPreferredItemHeightSmall"/>
+    android:paddingLeft="15dp"
+    android:textColor="#000000"
+    android:textSize="20sp"
+    android:textStyle="bold">
+</TextView>

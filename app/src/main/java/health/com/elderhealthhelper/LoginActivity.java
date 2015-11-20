@@ -2,15 +2,15 @@ package health.com.elderhealthhelper;
 
 import android.content.Context;
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.telephony.TelephonyManager;
 import android.widget.TextView;
-
 
 import com.android.volley.VolleyError;
 
 import health.com.elderhealthhelper.networking.WebServiceConnection;
+import health.com.elderhealthhelper.responsible.MainActivity;
 import health.com.elderhealthhelper.sms.SMSReceiver;
 
 public class LoginActivity extends AppCompatActivity {
@@ -22,6 +22,11 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         loginStatus = (TextView) findViewById(R.id.login_status);
+
+        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+        startActivity(intent);
+        finish();
+
         String phoneNumber = checkPhoneNumber();
         WebServiceConnection webServiceConnection = WebServiceConnection.getInstance(getApplicationContext());
         webServiceConnection.phoneNumberValidation(phoneNumber, new WebServiceConnection.CustomListener<String>(){
