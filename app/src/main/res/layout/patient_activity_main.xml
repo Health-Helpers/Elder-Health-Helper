@@ -26,9 +26,8 @@
         android:layout_gravity="center_horizontal"
         android:layout_below="@+id/textClock"
         android:layout_centerHorizontal="true"
-        android:backgroundTint="#0615e3"
         android:textColor="#ffffff"
-        android:textSize="20sp" />
+        android:theme="@style/pairButton" />
 
 
     <Button
@@ -40,9 +39,8 @@
         android:layout_centerVertical="true"
         android:layout_centerHorizontal="true"
         android:textStyle="bold"
-        android:backgroundTint="#21c604"
         android:textColor="#ffffff"
-        android:textSize="50sp" />
+        android:theme="@style/callButton"/>
 
     <Button
         android:layout_width="150dp"
@@ -54,8 +52,7 @@
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:textColor="#ffffff"
-        android:textSize="20sp"
-        android:backgroundTint="#4e4c4c" />
+        android:theme="@style/settingsButton"/>
 
 
 </RelativeLayout>

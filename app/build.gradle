@@ -11,6 +11,8 @@ android {
         versionCode 1
         versionName "1.0"
     }
+
+
     buildTypes {
         release {
             minifyEnabled false
@@ -21,6 +23,9 @@ android {
 
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
-    compile 'com.android.support:appcompat-v7:22.2.1'
+    compile 'com.android.support:appcompat-v7:22.1.0'
     compile 'com.mcxiaoke.volley:library:1.0.19'
+    compile 'com.android.support:design:22.2.0'
+    compile 'com.android.support:support-v4:22.0.1'
+    compile 'com.google.android.gms:play-services:8.3.0'
 }
