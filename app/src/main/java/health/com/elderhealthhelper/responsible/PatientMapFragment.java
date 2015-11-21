@@ -60,7 +60,7 @@ public  class PatientMapFragment extends Fragment {
 
         // create marker
         MarkerOptions marker = new MarkerOptions().position(
-                new LatLng(latitude, longitude)).title("Hello Maps");
+                new LatLng(latitude, longitude)).title("Patient Location");
 
         // Changing marker icon
         marker.icon(BitmapDescriptorFactory

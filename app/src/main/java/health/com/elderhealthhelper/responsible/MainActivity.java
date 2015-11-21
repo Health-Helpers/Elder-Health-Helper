@@ -120,7 +120,7 @@ public class MainActivity extends AppCompatActivity {
         fragment.setArguments(args);
 
         FragmentManager fragmentManager = getFragmentManager();
-        fragmentManager.beginTransaction().replace(R.id.content_frame, fragment).commit();
+        fragmentManager.beginTransaction().replace(R.id.content_frame, fragment).addToBackStack("responsible.MainActivity").commit();
 
         // update selected item and title, then close the drawer
         leftDrawerList.setItemChecked(position, true);

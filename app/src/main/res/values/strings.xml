@@ -7,14 +7,14 @@
 
 
     <string-array name="patients_array">
-        <item>Patient 1</item>
-        <item>Patient 2</item>
-        <item>Patient 3</item>
-        <item>Patient 4</item>
-        <item>Patient 5</item>
-        <item>Patient 6</item>
-        <item>Patient 7</item>
-        <item>Patient 8</item>
+        <item>Paciente 1</item>
+        <item>Paciente 2</item>
+        <item>Paciente 3</item>
+        <item>Paciente 4</item>
+        <item>Paciente 5</item>
+        <item>Paciente 6</item>
+        <item>Paciente 7</item>
+        <item>Paciente 8</item>
     </string-array>
 
     <string name="drawer_open">Open navigation drawer</string>
@@ -25,4 +25,7 @@
     <string name="locatePatient">Localizar paciente</string>
 
     <string name="patientSettings">Ajustes Paciente</string>
+    <string name="patientSettingsAlert">Alertas</string>
+    <string name="patientSettingsZone">Zona segura</string>
+    <string name="patientSettingsName">Nombre</string>
 </resources>

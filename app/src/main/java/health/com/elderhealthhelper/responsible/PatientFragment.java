@@ -47,13 +47,41 @@ public class PatientFragment extends Fragment {
                 Fragment fragment = new PatientMapFragment();
 
                 FragmentManager fragmentManager = getFragmentManager();
-                fragmentManager.beginTransaction().replace(R.id.content_frame, fragment).commit();
-
-                Toast.makeText(context, "Locate Pressed", Toast.LENGTH_SHORT).show();
+                fragmentManager.beginTransaction().replace(R.id.content_frame, fragment).addToBackStack("responsible.MainActivity").commit();
 
             }
         });
 
+        Button callPatientBtn = (Button) rootView.findViewById(R.id.responsibleCallBtn);
+        callPatientBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+               Context context = v.getContext();
+
+               /*  Fragment fragment = new PatientMapFragment();
+
+                FragmentManager fragmentManager = getFragmentManager();
+                fragmentManager.beginTransaction().replace(R.id.content_frame, fragment).addToBackStack("responsible.MainActivity").commit();
+*/
+                Toast.makeText(context, "Ring Ring!!", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        Button patientSettingsBtn = (Button) rootView.findViewById(R.id.patientSettingsBtn);
+        patientSettingsBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+               // Context context = v.getContext();
+
+                Fragment fragment = new PatientSettingsFragment();
+
+                FragmentManager fragmentManager = getFragmentManager();
+                fragmentManager.beginTransaction().replace(R.id.content_frame, fragment).addToBackStack("responsible.MainActivity").commit();
+
+            }
+        });
 
         getActivity().setTitle(patient);
         return rootView;
