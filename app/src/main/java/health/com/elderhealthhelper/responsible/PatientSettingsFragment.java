@@ -4,7 +4,6 @@ package health.com.elderhealthhelper.responsible;
  * Created by ivanjosa on 20/11/15.
  */
 
-import android.app.FragmentManager;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -24,8 +23,7 @@ public class PatientSettingsFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.responsible_patient_settings_fragment, container, false);
 
-        return rootView;
+        return inflater.inflate(R.layout.responsible_patient_settings_fragment, container, false);
     }
 }
