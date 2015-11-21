@@ -18,8 +18,6 @@ import health.com.elderhealthhelper.R;
  */
 public class PatientSettingsFragment extends Fragment {
 
-    public static FragmentManager fragmentManager;
-
     public PatientSettingsFragment() {
         // Empty constructor required for fragment subclasses
     }
