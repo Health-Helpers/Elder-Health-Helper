@@ -25,32 +25,26 @@ public class MainActivity extends AppCompatActivity {
 
     protected Toolbar toolbar;
     protected DrawerLayout drawerLayout;
-    private NavigationView navigationView;
     protected String[] mPatientTitles;
     protected FragmentStackManager fragmentStackManager;
+    private NavigationView navigationView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.responsible_activity_main);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-
         initView();
-
-
         fragmentStackManager = FragmentStackManager.getInstance(this);
     }
 
 
 
     private void initView() {
-
-        mPatientTitles =getResources().getStringArray(R.array.patients_array);
-
+        mPatientTitles = getResources().getStringArray(R.array.patients_array);
         // Initializing Toolbar and setting it as the actionbar
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
         //Initializing NavigationView
         navigationView = (NavigationView) findViewById(R.id.navigation_view);
 
@@ -185,9 +179,6 @@ public class MainActivity extends AppCompatActivity {
         fragment.setArguments(args);
 //        fragmentStackManager.resetBackStack(initialFragment,fragment,R.id.content_frame);
         fragmentStackManager.loadFragment(fragment, R.id.responsiblePatientFrame);
-
-
-
         setTitle(mPatientTitles[position]);
         closeDrawer();
     }

@@ -9,7 +9,7 @@ import android.widget.Toast;
 
 import health.com.elderhealthhelper.R;
 
-public class MainActivity extends AppCompatActivity{
+public class PatientMainActivity extends AppCompatActivity{
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

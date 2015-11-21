@@ -60,7 +60,7 @@ public class PatientFragment extends Fragment {
                /*  Fragment fragment = new PatientMapFragment();
 
                 FragmentManager fragmentManager = getFragmentManager();
-                fragmentManager.beginTransaction().replace(R.id.content_frame, fragment).addToBackStack("responsible.MainActivity").commit();
+                fragmentManager.beginTransaction().replace(R.id.content_frame, fragment).addToBackStack("responsible.PatientMainActivity").commit();
 */
                 Toast.makeText(context, "Ring Ring!!", Toast.LENGTH_SHORT).show();
             }
