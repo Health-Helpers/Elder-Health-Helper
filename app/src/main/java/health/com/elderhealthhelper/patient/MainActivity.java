@@ -24,16 +24,15 @@ public class MainActivity extends AppCompatActivity{
             @Override
             public void onClick(View v) {
 
-                Context context =  v.getContext();
+                Context context = v.getContext();
 
 
-                Toast.makeText(context,"Pair Pressed",Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, "Pair Pressed", Toast.LENGTH_SHORT).show();
+
+
 
             }
         });
-
     }
-
-
 
 }

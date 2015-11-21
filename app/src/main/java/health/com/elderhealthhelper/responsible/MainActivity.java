@@ -2,8 +2,8 @@ package health.com.elderhealthhelper.responsible;
 
 import android.content.DialogInterface;
 import android.content.pm.ActivityInfo;
-import android.content.res.Configuration;
 import android.os.Bundle;
+import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -11,11 +11,11 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
-import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import health.com.elderhealthhelper.R;
 import health.com.elderhealthhelper.ui.customdialogs.CustomDialogs;
@@ -25,9 +25,7 @@ public class MainActivity extends AppCompatActivity {
 
     protected Toolbar toolbar;
     protected DrawerLayout drawerLayout;
-    protected ActionBarDrawerToggle drawerToggle;
-    protected ListView leftDrawerList;
-    protected ArrayAdapter leftMenuAdapter;
+    private NavigationView navigationView;
     protected String[] mPatientTitles;
     protected FragmentStackManager fragmentStackManager;
 
@@ -36,85 +34,148 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.responsible_activity_main);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+
         initView();
-        if (toolbar != null) {
-            setSupportActionBar(toolbar);
-        }
-        initDrawer();
+
+
         fragmentStackManager = FragmentStackManager.getInstance(this);
     }
 
-    private void initDrawer() {
-        drawerToggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.drawer_open, R.string.drawer_close) {
+
+
+    private void initView() {
+
+        mPatientTitles =getResources().getStringArray(R.array.patients_array);
+
+        // Initializing Toolbar and setting it as the actionbar
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
+        //Initializing NavigationView
+        navigationView = (NavigationView) findViewById(R.id.navigation_view);
+
+        //Setting Navigation View Item Selected Listener to handle the item click of the navigation menu
+        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+
+            // This method will trigger on item Click of navigation menu
+            @Override
+            public boolean onNavigationItemSelected(MenuItem menuItem) {
+
+
+                //Checking if the item is in checked state or not, if not make it in checked state
+                if (menuItem.isChecked()) menuItem.setChecked(false);
+                else menuItem.setChecked(true);
+
+                //Closing drawer on item click
+                drawerLayout.closeDrawers();
+
+                //Check to see which item was being clicked and perform appropriate action
+                switch (menuItem.getItemId()) {
+
+                    default:
+                        Toast.makeText(getApplicationContext(), "Somethings Wrong", Toast.LENGTH_SHORT).show();
+                        return true;
+
+                }
+            }
+        });
+
+        // Initializing Drawer Layout and ActionBarToggle
+        drawerLayout = (DrawerLayout) findViewById(R.id.drawer);
+        ActionBarDrawerToggle actionBarDrawerToggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.openDrawer, R.string.closeDrawer) {
 
             @Override
             public void onDrawerClosed(View drawerView) {
+                // Code here will be triggered once the drawer closes as we dont want anything to happen so we leave this blank
                 super.onDrawerClosed(drawerView);
             }
 
             @Override
             public void onDrawerOpened(View drawerView) {
-                super.onDrawerOpened(drawerView);
+                // Code here will be triggered once the drawer open as we dont want anything to happen so we leave this blank
 
+                super.onDrawerOpened(drawerView);
             }
         };
-        drawerLayout.setDrawerListener(drawerToggle);
+
+        //Setting the actionbarToggle to drawer layout
+        drawerLayout.setDrawerListener(actionBarDrawerToggle);
+
+        //calling sync state is necessay or else your hamburger icon wont show up
+        actionBarDrawerToggle.syncState();
+
     }
 
-    private void initView() {
-        leftDrawerList = (ListView) findViewById(R.id.left_drawer);
-        toolbar = (Toolbar) findViewById(R.id.toolbar);
-        drawerLayout = (DrawerLayout) findViewById(R.id.drawerLayout);
-        leftDrawerList.setAdapter(setMenuCategories(leftMenuAdapter));
-        leftDrawerList.setOnItemClickListener(new DrawerItemClickListener());
-    }
-
-    private ArrayAdapter setMenuCategories(ArrayAdapter adapter2) {
-        mPatientTitles =getResources().getStringArray(R.array.patients_array);
-        adapter2 = new ArrayAdapter<String>(this, R.layout.responsible_patient_list_item, mPatientTitles);
-        return adapter2;
-    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.main, menu);
-        return super.onCreateOptionsMenu(menu);
+        // Inflate the menu; this adds items to the action bar if it is present.
+        //   getMenuInflater().inflate(R.menu.menu_main, menu);
+
+
+        Menu menuView = navigationView.getMenu();
+        menuView.removeItem(1);
+
+        /**
+         * Todo esto cambiara cuando los cojamos de base de datos
+         */
+        MenuItem item1 =  menuView.add("Paciente 1");
+        item1.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                selectItem(0);
+                return true;
+            }
+        });
+
+        MenuItem item2 = menuView.add ("Paciente 2");
+        item2.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                selectItem(1);
+                return true;
+            }
+        });
+
+        MenuItem item3 =menuView.add ("Paciente 3");
+        item3.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                selectItem(2);
+                return true;
+            }
+        });
+
+        MenuItem item4 = menuView.add ("Paciente 4");
+        item4.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                selectItem(3);
+                return true;
+            }
+        });
+
+        MenuItem item5 = menuView.add("Paciente 5");
+        item5.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                selectItem(4);
+                return true;
+            }
+        });
+
+        MenuItem item6 =  menuView.add("Paciente 6");
+        item6.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                selectItem(5);
+                return true;
+            }
+        });
+
+        return true;
     }
 
-//    /* Called whenever we call invalidateOptionsMenu() */
-//    @Override
-//    public boolean onPrepareOptionsMenu(Menu menu) {
-//        // If the nav drawer is open, hide action items related to the content view
-//        boolean drawerOpen = mDrawerLayout.isDrawerOpen(mDrawerList);
-//        menu.findItem(R.id.action_websearch).setVisible(!drawerOpen);
-//        return super.onPrepareOptionsMenu(menu);
-//    }
-
-//    @Override
-//    public boolean onOptionsItemSelected(MenuItem item) {
-//        // The action bar home/up action should open or close the drawer.
-//        // ActionBarDrawerToggle will take care of this.
-//        if (mDrawerToggle.onOptionsItemSelected(item)) {
-//            return true;
-//        }
-//        // Handle action buttons
-//        switch (item.getItemId()) {
-//            case R.id.action_websearch:
-//                // create intent to perform web search for this planet
-//                Intent intent = new Intent(Intent.ACTION_WEB_SEARCH);
-//                intent.putExtra(SearchManager.QUERY, getActionBar().getTitle());
-//                // catch event that there's no activity to handle intent
-//                if (intent.resolveActivity(getPackageManager()) != null) {
-//                    startActivity(intent);
-//                } else {
-//                    Toast.makeText(this, R.string.app_not_available, Toast.LENGTH_LONG).show();
-//                }
-//                return true;
-//            default:
-//                return super.onOptionsItemSelected(item);
-//        }
-//    }
 
     private void selectItem(int position) {
         // update the main content by replacing fragments
@@ -123,24 +184,14 @@ public class MainActivity extends AppCompatActivity {
         args.putInt(PatientFragment.ARG_PATIENT_NUMBER, position);
         fragment.setArguments(args);
 //        fragmentStackManager.resetBackStack(initialFragment,fragment,R.id.content_frame);
-        fragmentStackManager.loadFragment(fragment, R.id.content_frame);
-        // update selected item and title, then close the drawer
-        leftDrawerList.setItemChecked(position, true);
+        fragmentStackManager.loadFragment(fragment, R.id.responsiblePatientFrame);
+
+
+
         setTitle(mPatientTitles[position]);
         closeDrawer();
     }
 
-    @Override
-    protected void onPostCreate(Bundle savedInstanceState) {
-        super.onPostCreate(savedInstanceState);
-        drawerToggle.syncState();
-    }
-
-    @Override
-    public void onConfigurationChanged(Configuration newConfig) {
-        super.onConfigurationChanged(newConfig);
-        drawerToggle.onConfigurationChanged(newConfig);
-    }
 
     @Override
     public void onBackPressed() {

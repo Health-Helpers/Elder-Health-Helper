@@ -45,7 +45,7 @@ public class PatientFragment extends Fragment {
                 Context context = v.getContext();
 
                 Fragment fragment = new PatientMapFragment();
-                fragmentStackManager.loadFragment(fragment, R.id.content_frame);
+                fragmentStackManager.loadFragment(fragment, R.id.responsiblePatientFrame);
 
             }
         });
@@ -74,7 +74,7 @@ public class PatientFragment extends Fragment {
                // Context context = v.getContext();
 
                 Fragment fragment = new PatientSettingsFragment();
-                fragmentStackManager.loadFragment(fragment, R.id.content_frame);
+                fragmentStackManager.loadFragment(fragment, R.id.responsiblePatientFrame);
 
             }
         });
