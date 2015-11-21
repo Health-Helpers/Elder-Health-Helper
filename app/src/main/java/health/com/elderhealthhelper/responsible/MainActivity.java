@@ -1,10 +1,10 @@
 package health.com.elderhealthhelper.responsible;
 
-import android.app.Fragment;
-import android.app.FragmentManager;
+import android.content.DialogInterface;
 import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -18,6 +18,8 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import health.com.elderhealthhelper.R;
+import health.com.elderhealthhelper.ui.customdialogs.CustomDialogs;
+import health.com.elderhealthhelper.utils.FragmentStackManager;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -27,6 +29,7 @@ public class MainActivity extends AppCompatActivity {
     protected ListView leftDrawerList;
     protected ArrayAdapter leftMenuAdapter;
     protected String[] mPatientTitles;
+    protected FragmentStackManager fragmentStackManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +41,7 @@ public class MainActivity extends AppCompatActivity {
             setSupportActionBar(toolbar);
         }
         initDrawer();
+        fragmentStackManager = FragmentStackManager.getInstance(this);
     }
 
     private void initDrawer() {
@@ -118,10 +122,8 @@ public class MainActivity extends AppCompatActivity {
         Bundle args = new Bundle();
         args.putInt(PatientFragment.ARG_PATIENT_NUMBER, position);
         fragment.setArguments(args);
-
-        FragmentManager fragmentManager = getFragmentManager();
-        fragmentManager.beginTransaction().replace(R.id.content_frame, fragment).addToBackStack("responsible.MainActivity").commit();
-
+//        fragmentStackManager.resetBackStack(initialFragment,fragment,R.id.content_frame);
+        fragmentStackManager.loadFragment(fragment, R.id.content_frame);
         // update selected item and title, then close the drawer
         leftDrawerList.setItemChecked(position, true);
         setTitle(mPatientTitles[position]);
@@ -142,9 +144,21 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        if (!closeDrawer()) {
-            super.onBackPressed();
-            finish();
+        if (closeDrawer()) {
+        }else if (fragmentStackManager.popBackStatFragment()) {
+        } else {
+            CustomDialogs.closeDialog(MainActivity.this, new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    dialog.dismiss();
+                    finish();
+                }
+            }, new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    dialog.dismiss();
+                }
+            }).show();
         }
     }
 

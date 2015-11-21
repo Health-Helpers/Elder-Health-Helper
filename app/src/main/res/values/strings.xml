@@ -28,4 +28,16 @@
     <string name="patientSettingsAlert">Alertas</string>
     <string name="patientSettingsZone">Zona segura</string>
     <string name="patientSettingsName">Nombre</string>
+
+
+    <!-- CLOSE DIALOG-->
+    <string name="close">Exit</string>
+    <string name="close_body">Do you want to leave?</string>
+    <string name="Accept">Accept</string>
+    <string name="cancel">Cancel</string>
+
+    <!-- INTERNET -->
+    <string name="internet_tittle">Internet Connection</string>
+    <string name="internet_body">There\'s no internet connection. Please turn on WiFi or Mobile data.</string>
+
 </resources>
