@@ -4,10 +4,9 @@ package health.com.elderhealthhelper.responsible;
  * Created by ivanjosa on 20/11/15.
  */
 
-import android.app.Fragment;
-import android.app.FragmentManager;
 import android.content.Context;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,13 +14,14 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import health.com.elderhealthhelper.R;
+import health.com.elderhealthhelper.utils.FragmentStackManager;
 
 /**
  * Fragment that appears in the "content_frame", shows a patient
  */
 public class PatientFragment extends Fragment {
     public static final String ARG_PATIENT_NUMBER = "patient_number";
-    public static FragmentManager fragmentManager;
+    private FragmentStackManager fragmentStackManager;
 
     public PatientFragment() {
         // Empty constructor required for fragment subclasses
@@ -35,7 +35,7 @@ public class PatientFragment extends Fragment {
 
 
         // initialising the object of the FragmentManager. Here I'm passing getSupportFragmentManager(). You can pass getFragmentManager() if you are coding for Android 3.0 or above.
-        fragmentManager = getFragmentManager();
+        fragmentStackManager = FragmentStackManager.getInstance(getActivity());
 
         Button locatePatientBtn = (Button) rootView.findViewById(R.id.localizePatientBtn);
         locatePatientBtn.setOnClickListener(new View.OnClickListener() {
@@ -45,9 +45,7 @@ public class PatientFragment extends Fragment {
                 Context context = v.getContext();
 
                 Fragment fragment = new PatientMapFragment();
-
-                FragmentManager fragmentManager = getFragmentManager();
-                fragmentManager.beginTransaction().replace(R.id.content_frame, fragment).addToBackStack("responsible.MainActivity").commit();
+                fragmentStackManager.loadFragment(fragment, R.id.content_frame);
 
             }
         });
@@ -76,9 +74,7 @@ public class PatientFragment extends Fragment {
                // Context context = v.getContext();
 
                 Fragment fragment = new PatientSettingsFragment();
-
-                FragmentManager fragmentManager = getFragmentManager();
-                fragmentManager.beginTransaction().replace(R.id.content_frame, fragment).addToBackStack("responsible.MainActivity").commit();
+                fragmentStackManager.loadFragment(fragment, R.id.content_frame);
 
             }
         });
