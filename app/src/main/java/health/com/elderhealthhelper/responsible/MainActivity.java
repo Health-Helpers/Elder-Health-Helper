@@ -1,7 +1,11 @@
 package health.com.elderhealthhelper.responsible;
 
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.pm.ActivityInfo;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
@@ -15,7 +19,9 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
+
 
 import health.com.elderhealthhelper.R;
 import health.com.elderhealthhelper.ui.customdialogs.CustomDialogs;
@@ -38,8 +44,6 @@ public class MainActivity extends AppCompatActivity {
         fragmentStackManager = FragmentStackManager.getInstance(this);
         toolbar.setLogo(R.mipmap.ic_ehh);
     }
-
-
 
     private void initView() {
         // Initializing Toolbar and setting it as the actionbar
@@ -131,7 +135,7 @@ public class MainActivity extends AppCompatActivity {
         item2.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem item) {
-                selectItem(0);
+                selectItem(2);
                 return true;
             }
         });
@@ -148,6 +152,16 @@ public class MainActivity extends AppCompatActivity {
         item4.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem item) {
+                selectItem(4);
+                return true;
+            }
+        });
+
+        MenuItem item5 =  menuView.add("Emparejar");
+        item5.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                selectItem(5);
                 return true;
             }
         });
@@ -195,14 +209,36 @@ public class MainActivity extends AppCompatActivity {
 
 
     private void selectItem(int position) {
-        // update the main content by replacing fragments
-        Fragment fragment = new PatientsListFragment();
+
+        Fragment fragment;
+        Intent intents = null;
+
+        switch (position)
+        {
+            case 2:
+                // update the main content by replacing fragments
+                fragment = new PatientsListFragment();
 //        Bundle args = new Bundle();
 //        args.putInt(PatientFragment.ARG_PATIENT_NUMBER, position);
 //        fragment.setArguments(args);
 //        fragmentStackManager.resetBackStack(initialFragment,fragment,R.id.content_frame);
-        fragmentStackManager.loadFragment(fragment, R.id.responsiblePatientFrame);
-        closeDrawer();
+                fragmentStackManager.loadFragment(fragment, R.id.responsiblePatientFrame);
+                closeDrawer();
+                break;
+            case 4:
+                fragment = new ResponsibleSettingsFragment();
+                fragmentStackManager.loadFragment(fragment, R.id.responsiblePatientFrame);
+                closeDrawer();
+                break;
+            case 5:
+                fragment = new ResponsibleBluetoothFragment();
+                fragmentStackManager.loadFragment(fragment, R.id.responsiblePatientFrame);
+                closeDrawer();
+                break;
+        }
+
+
+
     }
 
 

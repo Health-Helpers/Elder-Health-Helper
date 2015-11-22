@@ -18,6 +18,12 @@
     <string name="patientSettingsName">Nombre</string>
 
 
+    <string name="responsibleSettingsNewPatient">Nuevo Paciente</string>
+    <string name="responsibleSettingsNewResponsible">Nuevo Responsable</string>
+    <string name="responsibleSettingsChangeIdiom">Cambio Idioma</string>
+    <string name="responsibleSettingsChange">Otros Cambios</string>
+
+
     <!-- CLOSE DIALOG-->
     <string name="close">Exit</string>
     <string name="close_body">Do you want to leave?</string>

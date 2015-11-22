@@ -16,43 +16,54 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="43dp"
+        android:textSize="30dp" />
 
     <Button
-        android:id="@+id/pairBtn"
+        android:id="@+id/btnNuevoResponsable"
         android:layout_width="150dp"
         android:layout_height="75dp"
-        android:layout_below="@+id/textClock"
-        android:layout_centerHorizontal="true"
         android:layout_gravity="center_horizontal"
         android:text="@string/pair"
         android:textColor="#ffffff"
-        android:theme="@style/pairButton" />
+        android:theme="@style/pairButton"
+        android:layout_below="@+id/textClock"
+        android:layout_alignRight="@+id/callBtn"
+        android:layout_alignEnd="@+id/callBtn"
+        android:layout_alignLeft="@+id/callBtn"
+        android:layout_alignStart="@+id/callBtn"
+        android:textSize="30dp" />
 
 
     <Button
         android:id="@+id/callBtn"
         android:layout_width="300dp"
         android:layout_height="200dp"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
         android:layout_gravity="center_horizontal"
         android:text="@string/call"
         android:textColor="#ffffff"
         android:textStyle="bold"
-        android:theme="@style/callButton"/>
+        android:theme="@style/callButton"
+        android:textSize="80dp"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true" />
 
     <Button
         android:id="@+id/settingsBtn"
         android:layout_width="150dp"
         android:layout_height="75dp"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
         android:layout_gravity="center_horizontal"
-        android:layout_marginBottom="50dp"
         android:text="@string/settings"
         android:textColor="#ffffff"
-        android:theme="@style/settingsButton"/>
+        android:theme="@style/settingsButton"
+        android:textSize="30dp"
+        android:layout_below="@+id/callBtn"
+        android:layout_marginTop="45dp"
+        android:layout_alignRight="@+id/callBtn"
+        android:layout_alignEnd="@+id/callBtn"
+        android:layout_alignLeft="@+id/callBtn"
+        android:layout_alignStart="@+id/callBtn" />
 
 
 </RelativeLayout>

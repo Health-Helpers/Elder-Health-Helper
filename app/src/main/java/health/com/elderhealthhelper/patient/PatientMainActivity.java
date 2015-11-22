@@ -16,7 +16,7 @@ public class PatientMainActivity extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.patient_activity_main);
 
-        Button pairButton = (Button) findViewById(R.id.pairBtn);
+        Button pairButton = (Button) findViewById(R.id.btnNuevoResponsable);
         Button callButton = (Button) findViewById(R.id.callBtn);
         Button settingsButton = (Button) findViewById(R.id.settingsBtn);
 
