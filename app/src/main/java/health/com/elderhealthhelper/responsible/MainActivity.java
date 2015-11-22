@@ -19,6 +19,7 @@ import android.widget.Toast;
 
 import health.com.elderhealthhelper.R;
 import health.com.elderhealthhelper.ui.customdialogs.CustomDialogs;
+import health.com.elderhealthhelper.ui.profile.ProfileFragment;
 import health.com.elderhealthhelper.utils.FragmentStackManager;
 
 public class MainActivity extends AppCompatActivity {
@@ -47,7 +48,6 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         //Initializing NavigationView
         navigationView = (NavigationView) findViewById(R.id.navigation_view);
-
         //Setting Navigation View Item Selected Listener to handle the item click of the navigation menu
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
 
@@ -97,7 +97,6 @@ public class MainActivity extends AppCompatActivity {
 
         //calling sync state is necessay or else your hamburger icon wont show up
         actionBarDrawerToggle.syncState();
-
     }
 
 
@@ -106,10 +105,18 @@ public class MainActivity extends AppCompatActivity {
         // Inflate the menu; this adds items to the action bar if it is present.
         //   getMenuInflater().inflate(R.menu.menu_main, menu);
 
+        View v = findViewById(R.id.header_view);
+        v.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Fragment profile = new ProfileFragment();
+                fragmentStackManager.loadFragment(profile, R.id.responsiblePatientFrame);
+                closeDrawer();
+            }
+        });
 
         Menu menuView = navigationView.getMenu();
         menuView.removeItem(1);
-
         /**
          * Todo esto cambiara cuando los cojamos de base de datos
          */

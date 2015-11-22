@@ -39,5 +39,6 @@
     <!-- INTERNET -->
     <string name="internet_tittle">Internet Connection</string>
     <string name="internet_body">There\'s no internet connection. Please turn on WiFi or Mobile data.</string>
+    <string name="logout">logout</string>
 
 </resources>

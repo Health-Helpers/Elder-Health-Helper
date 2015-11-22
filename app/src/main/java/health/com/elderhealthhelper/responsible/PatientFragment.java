@@ -55,7 +55,7 @@ public class PatientFragment extends Fragment {
             @Override
             public void onClick(View v) {
 
-               Context context = v.getContext();
+                Context context = v.getContext();
 
                /*  Fragment fragment = new PatientMapFragment();
 
@@ -71,7 +71,7 @@ public class PatientFragment extends Fragment {
             @Override
             public void onClick(View v) {
 
-               // Context context = v.getContext();
+                // Context context = v.getContext();
 
                 Fragment fragment = new PatientSettingsFragment();
                 fragmentStackManager.loadFragment(fragment, R.id.responsiblePatientFrame);
