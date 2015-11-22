@@ -26,7 +26,6 @@ public class MainActivity extends AppCompatActivity {
 
     protected Toolbar toolbar;
     protected DrawerLayout drawerLayout;
-    protected String[] mPatientTitles;
     protected FragmentStackManager fragmentStackManager;
     private NavigationView navigationView;
 
@@ -37,12 +36,12 @@ public class MainActivity extends AppCompatActivity {
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         initView();
         fragmentStackManager = FragmentStackManager.getInstance(this);
+        toolbar.setLogo(R.mipmap.ic_ehh);
     }
 
 
 
     private void initView() {
-        mPatientTitles = getResources().getStringArray(R.array.patients_array);
         // Initializing Toolbar and setting it as the actionbar
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -120,8 +119,16 @@ public class MainActivity extends AppCompatActivity {
         /**
          * Todo esto cambiara cuando los cojamos de base de datos
          */
-        MenuItem item1 =  menuView.add("Paciente 1");
+        MenuItem item1 = menuView.add("Home");
         item1.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                return true;
+            }
+        });
+
+        MenuItem item2 =  menuView.add("List of patients");
+        item2.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem item) {
                 selectItem(0);
@@ -129,64 +136,72 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        MenuItem item2 = menuView.add ("Paciente 2");
-        item2.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
-            @Override
-            public boolean onMenuItemClick(MenuItem item) {
-                selectItem(1);
-                return true;
-            }
-        });
-
-        MenuItem item3 =menuView.add ("Paciente 3");
+        MenuItem item3 =  menuView.add("Medic Centers");
         item3.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem item) {
-                selectItem(2);
                 return true;
             }
         });
 
-        MenuItem item4 = menuView.add ("Paciente 4");
+        MenuItem item4 =  menuView.add("Configuration");
         item4.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem item) {
-                selectItem(3);
                 return true;
             }
         });
 
-        MenuItem item5 = menuView.add("Paciente 5");
-        item5.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
-            @Override
-            public boolean onMenuItemClick(MenuItem item) {
-                selectItem(4);
-                return true;
-            }
-        });
 
-        MenuItem item6 =  menuView.add("Paciente 6");
-        item6.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
-            @Override
-            public boolean onMenuItemClick(MenuItem item) {
-                selectItem(5);
-                return true;
-            }
-        });
-
+//
+//        MenuItem item3 =menuView.add ("Paciente 3");
+//        item3.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+//            @Override
+//            public boolean onMenuItemClick(MenuItem item) {
+//                selectItem(2);
+//                return true;
+//            }
+//        });
+//
+//        MenuItem item4 = menuView.add ("Paciente 4");
+//        item4.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+//            @Override
+//            public boolean onMenuItemClick(MenuItem item) {
+//                selectItem(3);
+//                return true;
+//            }
+//        });
+//
+//        MenuItem item5 = menuView.add("Paciente 5");
+//        item5.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+//            @Override
+//            public boolean onMenuItemClick(MenuItem item) {
+//                selectItem(4);
+//                return true;
+//            }
+//        });
+//
+//        MenuItem item6 =  menuView.add("Paciente 6");
+//        item6.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+//            @Override
+//            public boolean onMenuItemClick(MenuItem item) {
+//                selectItem(5);
+//                return true;
+//            }
+//        });
+//
         return true;
     }
 
 
     private void selectItem(int position) {
         // update the main content by replacing fragments
-        Fragment fragment = new PatientFragment();
-        Bundle args = new Bundle();
-        args.putInt(PatientFragment.ARG_PATIENT_NUMBER, position);
-        fragment.setArguments(args);
+        Fragment fragment = new PatientsListFragment();
+//        Bundle args = new Bundle();
+//        args.putInt(PatientFragment.ARG_PATIENT_NUMBER, position);
+//        fragment.setArguments(args);
 //        fragmentStackManager.resetBackStack(initialFragment,fragment,R.id.content_frame);
         fragmentStackManager.loadFragment(fragment, R.id.responsiblePatientFrame);
-        setTitle(mPatientTitles[position]);
         closeDrawer();
     }
 

@@ -30,8 +30,8 @@ public class PatientFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.responsible_patient_fragment, container, false);
-        int i = getArguments().getInt(ARG_PATIENT_NUMBER);
-        String patient = getResources().getStringArray(R.array.patients_array)[i];
+        String patient= getArguments().getString(ARG_PATIENT_NUMBER);
+//        String patient = getResources().getStringArray(R.array.patients_array)[i];
 
 
         // initialising the object of the FragmentManager. Here I'm passing getSupportFragmentManager(). You can pass getFragmentManager() if you are coding for Android 3.0 or above.
