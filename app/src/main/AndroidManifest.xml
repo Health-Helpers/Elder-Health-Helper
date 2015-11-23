@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="health.com.elderhealthhelper"
+    package="com.hh.ehh"
     android:installLocation="preferExternal">
 
     <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
@@ -41,7 +41,7 @@
 
 
         <activity
-            android:name=".patient.PatientWelcome"
+            android:name="com.hh.ehh.patient.PatientWelcome"
             android:label="@string/app_name" >
 
             <intent-filter>
@@ -50,18 +50,18 @@
              </intent-filter>
 
          </activity>
-         <activity android:name=".responsible.MainActivity" >
+         <activity android:name="com.hh.ehh.responsible.MainActivity" >
              <!--<intent-filter>-->
                  <!--<action android:name="android.intent.action.MAIN" />-->
                  <!--<category android:name="android.intent.category.LAUNCHER" />-->
              <!--</intent-filter>-->
          </activity>
-         <activity android:name=".patient.PatientMainActivity" />
-         <activity android:name=".LoginActivity" />
+         <activity android:name="com.hh.ehh.patient.PatientMainActivity" />
+         <activity android:name="com.hh.ehh.LoginActivity" />
 
 -
 
-        <receiver android:name=".sms.SMSReceiver">
+        <receiver android:name="com.hh.ehh.sms.SMSReceiver">
             <intent-filter>
                 <action android:name="android.provider.Telephony.SMS_RECEIVED"/>
             </intent-filter>
