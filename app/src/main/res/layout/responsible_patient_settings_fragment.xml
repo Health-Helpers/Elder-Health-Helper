@@ -14,7 +14,7 @@
         android:id="@+id/patientAlertsBtn"
         android:layout_gravity="center_horizontal"
         android:textColor="#ffffff"
-        android:theme="@style/pairButton"
+        android:theme="@style/blueButton"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true" />
 
@@ -25,7 +25,7 @@
         android:id="@+id/secureZoneBtn"
         android:layout_gravity="center_horizontal"
         android:textColor="#ffffff"
-        android:theme="@style/pairButton"
+        android:theme="@style/blueButton"
         android:layout_centerVertical="true"
         android:layout_alignRight="@+id/patientAlertsBtn"
         android:layout_alignEnd="@+id/patientAlertsBtn"
@@ -39,7 +39,7 @@
         android:id="@+id/patientSettingsNameBtn"
         android:layout_gravity="center_horizontal"
         android:textColor="#ffffff"
-        android:theme="@style/pairButton"
+        android:theme="@style/blueButton"
         android:layout_below="@+id/secureZoneBtn"
         android:layout_alignLeft="@+id/secureZoneBtn"
         android:layout_alignStart="@+id/secureZoneBtn"

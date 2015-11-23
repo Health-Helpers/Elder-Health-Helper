@@ -12,7 +12,7 @@
         <item name="color">@android:color/white</item>
     </style>
 
-    <style name="pairButton" parent="AppTheme">
+    <style name="blueButton" parent="AppTheme">
         <item name="android:background">#0615e3</item>
         <item name="android:textColor">#ffffff</item>
         <item name="android:textSize">20sp</item>

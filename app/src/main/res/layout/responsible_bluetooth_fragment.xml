@@ -8,7 +8,7 @@
         android:layout_gravity="center_horizontal"
         android:text="@string/pair"
         android:textColor="#ffffff"
-        android:theme="@style/pairButton"
+        android:theme="@style/blueButton"
         android:textSize="30dp"
         android:layout_marginTop="110dp"
         android:layout_alignParentTop="true"
