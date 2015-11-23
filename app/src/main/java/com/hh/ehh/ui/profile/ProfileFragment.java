@@ -44,7 +44,7 @@ public class ProfileFragment extends Fragment {
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        profile = new Profile("Test user","troll@gmail.com","Neverland","No path");
+        profile = new Profile("Pedro Perez","test@gmail.com","Neverland","No path");
         //avatar.setImageDrawable(profile.getImageAsDrawable());
         name.setText(profile.getName());
         mail.setText(profile.getEmail());
