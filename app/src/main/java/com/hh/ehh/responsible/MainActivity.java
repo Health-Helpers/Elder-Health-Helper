@@ -29,7 +29,6 @@ public class MainActivity extends AppCompatActivity {
     protected DrawerLayout drawerLayout;
     protected FragmentStackManager fragmentStackManager;
     private NavigationView navigationView;
-    private ResponsibleHomeFragment responsibleHomeFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,9 +36,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.responsible_activity_main);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         initView();
-        responsibleHomeFragment = new ResponsibleHomeFragment();
         fragmentStackManager = FragmentStackManager.getInstance(this);
-        fragmentStackManager.loadFragment(responsibleHomeFragment,R.id.responsiblePatientFrame);
         toolbar.setLogo(R.mipmap.ic_ehh);
     }
 
@@ -142,6 +139,7 @@ public class MainActivity extends AppCompatActivity {
         item3.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem item) {
+                selectItem(3);
                 return true;
             }
         });
@@ -155,15 +153,53 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        MenuItem item5 =  menuView.add("Emparejar");
+       /* MenuItem item5 =  menuView.add("Emparejar");
         item5.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem item) {
                 selectItem(5);
                 return true;
             }
-        });
+        });*/
 
+
+//
+//        MenuItem item3 =menuView.add ("Paciente 3");
+//        item3.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+//            @Override
+//            public boolean onMenuItemClick(MenuItem item) {
+//                selectItem(2);
+//                return true;
+//            }
+//        });
+//
+//        MenuItem item4 = menuView.add ("Paciente 4");
+//        item4.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+//            @Override
+//            public boolean onMenuItemClick(MenuItem item) {
+//                selectItem(3);
+//                return true;
+//            }
+//        });
+//
+//        MenuItem item5 = menuView.add("Paciente 5");
+//        item5.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+//            @Override
+//            public boolean onMenuItemClick(MenuItem item) {
+//                selectItem(4);
+//                return true;
+//            }
+//        });
+//
+//        MenuItem item6 =  menuView.add("Paciente 6");
+//        item6.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+//            @Override
+//            public boolean onMenuItemClick(MenuItem item) {
+//                selectItem(5);
+//                return true;
+//            }
+//        });
+//
         return true;
     }
 
@@ -175,28 +211,35 @@ public class MainActivity extends AppCompatActivity {
 
         switch (position)
         {
-            case 1:
-                fragmentStackManager.resetBackStack(responsibleHomeFragment);
             case 2:
                 // update the main content by replacing fragments
                 fragment = new PatientsListFragment();
-                fragmentStackManager.resetBackStack(responsibleHomeFragment,fragment,R.id.responsiblePatientFrame);
+//        Bundle args = new Bundle();
+//        args.putInt(PatientFragment.ARG_PATIENT_NUMBER, position);
+//        fragment.setArguments(args);
+//        fragmentStackManager.resetBackStack(initialFragment,fragment,R.id.content_frame);
+                fragmentStackManager.loadFragment(fragment, R.id.responsiblePatientFrame);
+                closeDrawer();
+                break;
+            case 3:
+                fragment = new MedicalCentersListFragment();
                 fragmentStackManager.loadFragment(fragment, R.id.responsiblePatientFrame);
                 closeDrawer();
                 break;
             case 4:
                 fragment = new ResponsibleSettingsFragment();
-                fragmentStackManager.resetBackStack(responsibleHomeFragment,fragment,R.id.responsiblePatientFrame);
                 fragmentStackManager.loadFragment(fragment, R.id.responsiblePatientFrame);
                 closeDrawer();
                 break;
             case 5:
                 fragment = new ResponsibleBluetoothFragment();
-                fragmentStackManager.resetBackStack(responsibleHomeFragment,fragment,R.id.responsiblePatientFrame);
                 fragmentStackManager.loadFragment(fragment, R.id.responsiblePatientFrame);
                 closeDrawer();
                 break;
         }
+
+
+
     }
 
 

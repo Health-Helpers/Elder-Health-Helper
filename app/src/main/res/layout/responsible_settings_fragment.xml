@@ -17,20 +17,20 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
 
-    <Button
-        android:id="@+id/btnNewResponsible"
-        android:layout_width="150dp"
-        android:layout_height="75dp"
-        android:layout_gravity="center_horizontal"
-        android:text="@string/responsibleSettingsNewResponsible"
-        android:textColor="#ffffff"
-        android:theme="@style/pairButton"
-        android:textSize="30dp"
-        android:layout_below="@+id/btnNewPatient"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+    <!--<Button-->
+        <!--android:id="@+id/btnNewResponsible"-->
+        <!--android:layout_width="150dp"-->
+        <!--android:layout_height="75dp"-->
+        <!--android:layout_gravity="center_horizontal"-->
+        <!--android:text="@string/responsibleSettingsNewResponsible"-->
+        <!--android:textColor="#ffffff"-->
+        <!--android:theme="@style/pairButton"-->
+        <!--android:textSize="30dp"-->
+        <!--android:layout_below="@+id/btnNewPatient"-->
+        <!--android:layout_alignParentRight="true"-->
+        <!--android:layout_alignParentEnd="true"-->
+        <!--android:layout_alignParentLeft="true"-->
+        <!--android:layout_alignParentStart="true" />-->
 
     <Button
         android:id="@+id/btnChangeIdiom"
@@ -41,7 +41,6 @@
         android:textColor="#ffffff"
         android:theme="@style/pairButton"
         android:textSize="30dp"
-        android:layout_below="@+id/btnNewResponsible"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentLeft="true"

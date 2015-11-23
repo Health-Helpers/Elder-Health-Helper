@@ -27,7 +27,7 @@
         android:layout_alignStart="@+id/profile_image"
         android:gravity="left"
         android:paddingBottom="4dp"
-        android:text="Perico de los palotes"
+        android:text="Pedro Perez"
         android:textColor="#FFF"
         android:textSize="14sp"
         android:textStyle="bold" />
