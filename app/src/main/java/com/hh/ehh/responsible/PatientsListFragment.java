@@ -9,13 +9,13 @@ import android.widget.AdapterView;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.hh.ehh.R;
 import com.hh.ehh.adapters.PatientAdapter;
 import com.hh.ehh.model.Patient;
 import com.hh.ehh.utils.FragmentStackManager;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class PatientsListFragment extends Fragment{
@@ -28,6 +28,7 @@ public class PatientsListFragment extends Fragment{
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.responsible_patient_list_fragment, container,false);
         patientsList = (ListView) view.findViewById(R.id.patientsList);
+        getActivity().setTitle("");
         return view;
     }
 

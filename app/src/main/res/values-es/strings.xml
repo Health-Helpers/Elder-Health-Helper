@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Elder Health Helper</string>
+    <string name="Accept">Aceptar</string>
+    <string name="action_websearch"></string>
+    <string name="call">Llamada</string>
+    <string name="cancel">Cancelar</string>
+    <string name="close">Salir</string>
+    <string name="close_body">Quiere salir de la aplicación?</string>
+    <string name="locatePatient">Localizar Paciente</string>
+    <string name="logout">Salir</string>
+    <string name="pair">Emparejar Botón</string>
+    <string name="patientSettings">Ajustes Paciente</string>
+    <string name="patientSettingsAlert">Alertas</string>
+    <string name="patientSettingsName">Nombre</string>
+    <string name="patientSettingsZone">Zona Segura</string>
+    <string name="responsibleSettingsChange">Otros Ajustes</string>
+    <string name="responsibleSettingsChangeIdiom">Cambiar idioma</string>
+    <string name="responsibleSettingsNewPatient">Nuevo Paciente</string>
+    <string name="responsibleSettingsNewResponsible">Nuevo Responsable</string>
+    <string name="settings">Ajustes</string>
+</resources>
