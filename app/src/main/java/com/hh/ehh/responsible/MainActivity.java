@@ -125,6 +125,7 @@ public class MainActivity extends AppCompatActivity {
         item1.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem item) {
+                selectItem(1);
                 return true;
             }
         });
@@ -156,15 +157,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        MenuItem item5 =  menuView.add("Emparejar");
-        item5.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
-            @Override
-            public boolean onMenuItemClick(MenuItem item) {
-                selectItem(5);
-                return true;
-            }
-        });
-
         return true;
     }
 
@@ -178,6 +170,8 @@ public class MainActivity extends AppCompatActivity {
         {
             case 1:
                 fragmentStackManager.resetBackStack(responsibleHomeFragment);
+                closeDrawer();
+                break;
             case 2:
                 // update the main content by replacing fragments
                 fragment = new PatientsListFragment();
@@ -193,12 +187,6 @@ public class MainActivity extends AppCompatActivity {
                 break;
             case 4:
                 fragment = new ResponsibleSettingsFragment();
-                fragmentStackManager.resetBackStack(responsibleHomeFragment);
-                fragmentStackManager.loadFragment(fragment, R.id.responsiblePatientFrame);
-                closeDrawer();
-                break;
-            case 5:
-                fragment = new ResponsibleBluetoothFragment();
                 fragmentStackManager.resetBackStack(responsibleHomeFragment);
                 fragmentStackManager.loadFragment(fragment, R.id.responsiblePatientFrame);
                 closeDrawer();
