@@ -121,6 +121,9 @@ public class MainActivity extends AppCompatActivity {
         /**
          * Todo esto cambiara cuando los cojamos de base de datos
          */
+
+        menuView.clear();
+
         MenuItem item1 = menuView.add("Home");
         item1.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
             @Override
@@ -129,6 +132,7 @@ public class MainActivity extends AppCompatActivity {
                 return true;
             }
         });
+
 
         MenuItem item2 =  menuView.add("List of patients");
         item2.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {

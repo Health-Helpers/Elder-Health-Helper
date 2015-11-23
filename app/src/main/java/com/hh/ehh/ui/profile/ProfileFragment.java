@@ -49,7 +49,7 @@ public class ProfileFragment extends Fragment {
         name.setText(profile.getName());
         mail.setText(profile.getEmail());
         city.setText(profile.getLocation());
-//        setHasOptionsMenu(true);
+       setHasOptionsMenu(true);
     }
 
     @Override
