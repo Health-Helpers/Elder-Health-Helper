@@ -58,20 +58,20 @@ public class FragmentStackManager {
         return false;
     }
 
-    /**
-     * Pop until a given fragment and load a simple fragment.
-     * @param toPop
-     * @param toLoad
-     * @param frame
-     */
-    public void resetBackStack(Fragment toPop, Fragment toLoad, int frame){
-        String fragmentName = toLoad.getClass().getName();
-        fragmentManager.popBackStack(toPop.getClass().getName(), 0);
-        FragmentTransaction ft = fragmentManager.beginTransaction();
-        ft.replace(frame, toLoad, fragmentName);
-        ft.addToBackStack(fragmentName);
-        ft.commit();
-    }
+//    /**
+//     * Pop until a given fragment and load a simple fragment.
+//     * @param toPop
+//     * @param toLoad
+//     * @param frame
+//     */
+//    public void resetBackStack(Fragment toPop, Fragment toLoad, int frame){
+//        String fragmentName = toLoad.getClass().getName();
+//        fragmentManager.popBackStack(toPop.getClass().getName(), 0);
+////        FragmentTransaction ft = fragmentManager.beginTransaction();
+////        ft.replace(frame, toLoad, fragmentName);
+////        ft.addToBackStack(fragmentName);
+////        ft.commit();
+//    }
 
     /**
      * Pop until last fragment.

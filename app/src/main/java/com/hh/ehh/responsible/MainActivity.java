@@ -181,24 +181,25 @@ public class MainActivity extends AppCompatActivity {
             case 2:
                 // update the main content by replacing fragments
                 fragment = new PatientsListFragment();
-                fragmentStackManager.resetBackStack(responsibleHomeFragment,fragment,R.id.responsiblePatientFrame);
+                fragmentStackManager.resetBackStack(responsibleHomeFragment);
                 fragmentStackManager.loadFragment(fragment, R.id.responsiblePatientFrame);
                 closeDrawer();
                 break;
             case 3:
                 fragment = new MedicalCentersListFragment();
+                fragmentStackManager.resetBackStack(responsibleHomeFragment);
                 fragmentStackManager.loadFragment(fragment, R.id.responsiblePatientFrame);
                 closeDrawer();
                 break;
             case 4:
                 fragment = new ResponsibleSettingsFragment();
-                fragmentStackManager.resetBackStack(responsibleHomeFragment,fragment,R.id.responsiblePatientFrame);
+                fragmentStackManager.resetBackStack(responsibleHomeFragment);
                 fragmentStackManager.loadFragment(fragment, R.id.responsiblePatientFrame);
                 closeDrawer();
                 break;
             case 5:
                 fragment = new ResponsibleBluetoothFragment();
-                fragmentStackManager.resetBackStack(responsibleHomeFragment,fragment,R.id.responsiblePatientFrame);
+                fragmentStackManager.resetBackStack(responsibleHomeFragment);
                 fragmentStackManager.loadFragment(fragment, R.id.responsiblePatientFrame);
                 closeDrawer();
                 break;
