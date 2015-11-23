@@ -32,6 +32,11 @@ public class FragmentStackManager {
         return mInstance;
     }
 
+    /**
+     * Load new fragment to a resource given as parameter
+     * @param toLoad
+     * @param frame
+     */
     public void loadFragment(Fragment toLoad, int frame){
         String fragmentName = toLoad.getClass().getName();
         FragmentTransaction ft = fragmentManager.beginTransaction();
@@ -40,6 +45,10 @@ public class FragmentStackManager {
         ft.commit();
     }
 
+    /**
+     * Pop 1 fragment from de backstack and returns false if you can't pop more items.
+     * @return
+     */
     public boolean popBackStatFragment(){
         if (fragmentManager.getBackStackEntryCount() > 1) {
             fragmentManager.popBackStack();
@@ -49,6 +58,12 @@ public class FragmentStackManager {
         return false;
     }
 
+    /**
+     * Pop until a given fragment and load a simple fragment.
+     * @param toPop
+     * @param toLoad
+     * @param frame
+     */
     public void resetBackStack(Fragment toPop, Fragment toLoad, int frame){
         String fragmentName = toLoad.getClass().getName();
         fragmentManager.popBackStack(toPop.getClass().getName(), 0);
@@ -56,7 +71,13 @@ public class FragmentStackManager {
         ft.replace(frame, toLoad, fragmentName);
         ft.addToBackStack(fragmentName);
         ft.commit();
-
     }
 
+    /**
+     * Pop until last fragment.
+     * @param fragment
+     */
+    public void resetBackStack(Fragment fragment){
+        fragmentManager.popBackStack(fragment.getClass().getName(), 0);
+    }
 }

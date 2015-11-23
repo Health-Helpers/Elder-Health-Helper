@@ -12,19 +12,19 @@
         <item name="color">@android:color/white</item>
     </style>
 
-    <style name="pairButton" parent="android:style/Theme.NoTitleBar">
+    <style name="pairButton" parent="AppTheme">
         <item name="android:background">#0615e3</item>
         <item name="android:textColor">#ffffff</item>
         <item name="android:textSize">20sp</item>
     </style>
 
-    <style name="callButton" parent="android:style/Theme.NoTitleBar">
+    <style name="callButton" parent="AppTheme">
         <item name="android:background">#21c604</item>
         <item name="android:textColor">#ffffff</item>
         <item name="android:textSize">50sp</item>
     </style>
 
-    <style name="settingsButton" parent="android:style/Theme.NoTitleBar">
+    <style name="settingsButton" parent="AppTheme">
         <item name="android:background">#4e4c4c</item>
         <item name="android:textColor">#ffffff</item>
         <item name="android:textSize">20sp</item>
