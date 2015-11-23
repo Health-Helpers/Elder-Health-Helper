@@ -29,7 +29,7 @@
             android:paddingLeft="10dp"
             android:paddingRight="10dp"
             android:singleLine="true"
-            android:text="John Smith Test"
+            android:text="Pedro Perez"
             android:textSize="18sp"
             android:textStyle="bold" />
 
@@ -43,7 +43,7 @@
             android:paddingLeft="10dp"
             android:paddingRight="10dp"
             android:singleLine="true"
-            android:text="Johnsmith@mail.com"
+            android:text="test@gmail.com"
             android:textColor="#FF707070" />
 
         <TextView
@@ -68,6 +68,6 @@
         android:layout_above="@+id/informations_container"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="-16dp"
-        android:src="@drawable/profile" />
+        android:src="@drawable/android" />
 
 </RelativeLayout>
