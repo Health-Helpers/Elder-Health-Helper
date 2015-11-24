@@ -16,7 +16,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Checking your phone number"
+        android:text="@string/check_number"
         android:id="@+id/login_status"
         android:layout_below="@+id/imageView"
         android:layout_centerHorizontal="true"

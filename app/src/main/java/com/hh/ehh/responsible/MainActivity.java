@@ -1,5 +1,6 @@
 package com.hh.ehh.responsible;
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
@@ -106,7 +107,10 @@ public class MainActivity extends AppCompatActivity {
         // Inflate the menu; this adds items to the action bar if it is present.
         //   getMenuInflater().inflate(R.menu.menu_main, menu);
 
+
         View v = findViewById(R.id.header_view);
+        Context context = v.getContext();
+
         v.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -124,7 +128,14 @@ public class MainActivity extends AppCompatActivity {
 
         menuView.clear();
 
-        MenuItem item1 = menuView.add("Home");
+        android.content.res.Resources res = context.getResources();
+        String homeStr = res.getString(R.string.home);
+        String patientsListStr = res.getString(R.string.patientsList);
+        String medicalCentersStr = res.getString(R.string.medicalCenters);
+        String configurationStr = res.getString(R.string.configuration);
+
+
+        MenuItem item1 = menuView.add(homeStr);
         item1.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem item) {
@@ -134,7 +145,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
-        MenuItem item2 =  menuView.add("List of patients");
+        MenuItem item2 =  menuView.add(patientsListStr);
         item2.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem item) {
@@ -143,7 +154,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        MenuItem item3 =  menuView.add("Medical Centers");
+        MenuItem item3 =  menuView.add(medicalCentersStr);
         item3.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem item) {
@@ -152,7 +163,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        MenuItem item4 =  menuView.add("Configuration");
+        MenuItem item4 =  menuView.add(configurationStr);
         item4.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem item) {

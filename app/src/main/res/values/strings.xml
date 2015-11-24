@@ -1,9 +1,12 @@
 <resources>
     <string name="app_name">Elder Health Helper</string>
+    <string name="welcomeMsg">Welcome</string>
+    <string name="welcomeResp">Welcome to responsible APP</string>
     <string name="settings">Settings</string>
     <string name="pair">Pair Button</string>
     <string name="call">Call</string>
     <string name="phone_number">654321123</string>
+    <string name="check_number">Checking your phone number</string>
 
     <string name="closeDrawer">Navigation View</string>
     <string name="openDrawer">Navigation View Closed</string>
@@ -11,6 +14,9 @@
     <string name="app_not_available">Sorry, there\'s no web browser available</string>
 
     <string name="locatePatient">Locate Patient</string>
+    <string name="patient">Patient</string>
+    <string name="responsible">Responsible</string>
+
 
     <string name="patientSettings">Patient Settings</string>
     <string name="patientSettingsAlert">Alerts</string>
@@ -22,6 +28,13 @@
     <string name="responsibleSettingsNewResponsible">New Responsible</string>
     <string name="responsibleSettingsChangeIdiom">Change Locale</string>
     <string name="responsibleSettingsChange">Other Settings</string>
+
+
+    <!-- MENU -->
+    <string name="home">Home</string>
+    <string name="patientsList">Patients List</string>
+    <string name="medicalCenters">Medical Centers</string>
+    <string name="configuration">Configuration</string>
 
 
     <!-- CLOSE DIALOG-->

@@ -1,15 +1,12 @@
 package com.hh.ehh.patient;
 
 import android.bluetooth.BluetoothDevice;
-import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.Toast;
 
 import com.hh.ehh.R;
 import com.hh.ehh.bluetooth.Bluetooth;
@@ -33,7 +30,8 @@ public class PatientHomeFragment extends Fragment implements Bluetooth.Bluetooth
         View view = inflater.inflate(R.layout.patient_activity_main, container, false);
         btnBluetooth = (Button) view.findViewById(R.id.btnBluetooth);
 
-        try {
+        //Comento esto porque en caso de que no se disponga de bluetooth en el dispositivo, hace vaya lento
+     /*   try {
             bluetooth = Bluetooth.startFindDevices(getActivity(), this);
         } catch (Exception e) {
             Log.e(TAG, "Error: ", e);
@@ -54,7 +52,7 @@ public class PatientHomeFragment extends Fragment implements Bluetooth.Bluetooth
 
             }
         });
-
+*/
         return view;
     }
 

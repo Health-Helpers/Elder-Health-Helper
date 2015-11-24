@@ -27,7 +27,7 @@
         android:layout_gravity="center_horizontal"
         android:text="@string/pair"
         android:textColor="#ffffff"
-        android:theme="@style/blueButton"
+        android:background="@drawable/custom_blue_button"
         android:layout_below="@+id/textClock"
         android:layout_alignRight="@+id/callBtn"
         android:layout_alignEnd="@+id/callBtn"
@@ -44,10 +44,11 @@
         android:text="@string/call"
         android:textColor="#ffffff"
         android:textStyle="bold"
-        android:theme="@style/greenButton"
-        android:textSize="80dp"
-        android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true" />
+        android:background="@drawable/custom_green_button"
+        android:textSize="60dp"
+        android:layout_above="@+id/settingsBtn"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="53dp" />
 
     <Button
         android:id="@+id/settingsBtn"
@@ -56,14 +57,13 @@
         android:layout_gravity="center_horizontal"
         android:text="@string/settings"
         android:textColor="#ffffff"
-        android:theme="@style/grayButton"
+        android:background="@drawable/custom_blue_button"
         android:textSize="30dp"
-        android:layout_below="@+id/callBtn"
-        android:layout_marginTop="45dp"
-        android:layout_alignRight="@+id/callBtn"
-        android:layout_alignEnd="@+id/callBtn"
+        android:layout_alignParentBottom="true"
         android:layout_alignLeft="@+id/callBtn"
-        android:layout_alignStart="@+id/callBtn" />
+        android:layout_alignStart="@+id/callBtn"
+        android:layout_alignRight="@+id/callBtn"
+        android:layout_alignEnd="@+id/callBtn" />
 
 
 </RelativeLayout>

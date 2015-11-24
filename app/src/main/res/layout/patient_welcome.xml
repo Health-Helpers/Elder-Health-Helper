@@ -7,7 +7,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceSmall"
-        android:text="Bienvenido"
+        android:text="@string/welcomeMsg"
         android:id="@+id/lblBienvenido"
         android:layout_marginTop="39dp"
         android:textSize="60dp"
@@ -38,7 +38,7 @@
         <RadioButton
             android:layout_width="wrap_content"
             android:layout_height="0dp"
-            android:text="Paciente"
+            android:text="@string/patient"
             android:id="@+id/rbPaciente"
             android:checked="false"
             android:layout_weight="1"
@@ -48,7 +48,7 @@
         <RadioButton
             android:layout_width="wrap_content"
             android:layout_height="0dp"
-            android:text="Responsable"
+            android:text="@string/responsible"
             android:id="@+id/rbResponsable"
             android:layout_alignParentBottom="true"
             android:layout_alignLeft="@+id/imageView2"

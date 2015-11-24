@@ -47,7 +47,9 @@ public class ResponsibleSettingsFragment extends Fragment{
             }
         });
 
-
+        android.content.res.Resources res = view.getContext().getResources();
+        String configStr = res.getString(R.string.configuration);
+        getActivity().setTitle(configStr);
 
         return view;
     }

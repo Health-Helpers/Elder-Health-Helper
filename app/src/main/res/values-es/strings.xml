@@ -1,6 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Elder Health Helper</string>
+    <string name="welcomeMsg">Bienvenido</string>
+    <string name="check_number">Comprobando su número</string>
+
+    <string name="patient">Paciente</string>
+    <string name="responsible">Responsable</string>
+    <string name="welcomeResp">Bienvenido a la APP del responsable</string>
+
     <string name="Accept">Aceptar</string>
     <string name="action_websearch"></string>
     <string name="call">Llamada</string>
@@ -19,4 +26,11 @@
     <string name="responsibleSettingsNewPatient">Nuevo Paciente</string>
     <string name="responsibleSettingsNewResponsible">Nuevo Responsable</string>
     <string name="settings">Ajustes</string>
+
+
+    <!-- MENU -->
+    <string name="home">Inicio</string>
+    <string name="patientsList">Listado de pacientes</string>
+    <string name="medicalCenters">Centros Medicos</string>
+    <string name="configuration">Configuración</string>
 </resources>
