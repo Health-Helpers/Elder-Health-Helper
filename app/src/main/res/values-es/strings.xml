@@ -8,6 +8,11 @@
     <string name="responsible">Responsable</string>
     <string name="welcomeResp">Bienvenido a la APP del responsable</string>
 
+    <string name="closeDrawer">Navigation View</string>
+    <string name="openDrawer">Navigation View Cerrado</string>
+    <string name="app_not_available">Disculpe, no hay navegador web disponible</string>
+
+    <string name="phone_number">654321123</string>
     <string name="Accept">Aceptar</string>
     <string name="action_websearch"></string>
     <string name="call">Llamada</string>
@@ -33,4 +38,9 @@
     <string name="patientsList">Listado de pacientes</string>
     <string name="medicalCenters">Centros Medicos</string>
     <string name="configuration">Configuración</string>
+
+    <!-- INTERNET -->
+    <string name="internet_tittle">Conexión a Internet</string>
+    <string name="internet_body">No hay conexión a internet disponible</string>
+
 </resources>
