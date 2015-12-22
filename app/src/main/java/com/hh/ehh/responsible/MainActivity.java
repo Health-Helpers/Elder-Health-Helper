@@ -236,11 +236,11 @@ public class MainActivity extends AppCompatActivity {
         Profile dbProfile = null;
         if(database!=null){
             dbProfile = ProfileDatabaseManager.getProfile(database);
-            dbProfile = new Profile("1","Juan","Perez","juanperez@gmail.com","Lleida",null,"973234323");
+            dbProfile = new Profile("1","Juan","Pérez","juanperez@gmail.com","Lleida",null,"973234323");
         }
         /*Must be removed*/
         else{
-            dbProfile = new Profile("1","Juan","Perez","juanperez@gmail.com","Lleida",null,"973234323");
+            dbProfile = new Profile("1","Juan","Pérez","juanperez@gmail.com","Lleida",null,"973234323");
             profile = dbProfile;
         }
 

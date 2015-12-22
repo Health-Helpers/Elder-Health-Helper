@@ -62,8 +62,8 @@ public class Patient extends User implements Parcelable {
         return result;
     }
 
-    public static final Parcelable.Creator CREATOR =
-            new Parcelable.Creator() {
+    public static final Creator CREATOR =
+            new Creator() {
                 public Patient createFromParcel(Parcel in) {
                     return new Patient(in);
                 }

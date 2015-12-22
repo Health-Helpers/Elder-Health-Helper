@@ -116,8 +116,8 @@ public class Profile implements Parcelable {
         return result;
     }
 
-    public static final Parcelable.Creator CREATOR =
-            new Parcelable.Creator() {
+    public static final Creator CREATOR =
+            new Creator() {
                 public Profile createFromParcel(Parcel in) {
                     return new Profile(in);
                 }

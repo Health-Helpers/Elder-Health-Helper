@@ -97,10 +97,10 @@ public class DeviceList extends Activity {
         /*****Comentar el if si el dispositivo no tiene bluetooth*/
         if (pairedDevices.size() > 0) {
             for (BluetoothDevice device : pairedDevices) {
-                //mPairedDevicesArrayAdapter.add(device.getName() + "\n" + device.getAddress());
+                mPairedDevicesArrayAdapter.add(device.getName() + "\n" + device.getAddress());
 
                 if(device.getAddress().equals("20:14:02:17:10:85"))
-           //     if(device.getAddress().equals("9C:F3:87:AB:AA:09"))
+               // if(device.getAddress().equals("9C:F3:87:AB:AA:09"))
                 {
                     mPairedDevicesArrayAdapter.add("EHH Button" + "\n" + device.getAddress());
                 }
