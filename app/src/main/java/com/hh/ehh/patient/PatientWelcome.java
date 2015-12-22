@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.RadioButton;
 
 import com.hh.ehh.R;
+import com.hh.ehh.bluetooth.BluetoothSPP;
 import com.hh.ehh.responsible.MainActivity;
 
 
@@ -15,6 +16,7 @@ public class PatientWelcome  extends Activity {
     private RadioButton rbPaciente;
     private RadioButton rbResponsable;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -22,6 +24,9 @@ public class PatientWelcome  extends Activity {
 
         rbPaciente = (RadioButton)findViewById(R.id.rbPaciente);
         rbResponsable = (RadioButton)findViewById(R.id.rbResponsable);
+
+
+
 
     }
 

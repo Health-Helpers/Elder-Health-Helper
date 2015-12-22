@@ -62,6 +62,7 @@
          </activity>
          <activity android:name="com.hh.ehh.patient.PatientMainActivity" />
          <activity android:name="com.hh.ehh.LoginActivity" />
+        <activity  android:name="com.hh.ehh.bluetooth.DeviceList" />
 
 -
 

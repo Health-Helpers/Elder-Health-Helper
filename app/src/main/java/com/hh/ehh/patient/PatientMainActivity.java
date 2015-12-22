@@ -12,7 +12,7 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import com.hh.ehh.R;
-import com.hh.ehh.bluetooth.Bluetooth;
+import com.hh.ehh.bluetooth.BluetoothSPP;
 import com.hh.ehh.ui.customdialogs.CustomDialogs;
 import com.hh.ehh.utils.FragmentStackManager;
 
@@ -21,7 +21,7 @@ import java.util.ArrayList;
 public class PatientMainActivity extends AppCompatActivity {
 
     private FragmentStackManager fragmentStackManager;
-
+    private BluetoothSPP bt;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,7 +32,10 @@ public class PatientMainActivity extends AppCompatActivity {
         fragmentStackManager.loadFragment(patientHome, R.id.home_frame_container);
 
 
-
+        bt = new BluetoothSPP(this);
+        if(!bt.isBluetoothEnabled()) {
+            bt.enable();
+        }
     }
 
     @Override
@@ -51,6 +54,8 @@ public class PatientMainActivity extends AppCompatActivity {
                     dialog.dismiss();
                 }
             }).show();
+
+            bt.stopService();
         }
     }
 }
