@@ -14,7 +14,7 @@
     <string name="app_not_available">Sorry, there\'s no web browser available</string>
 
     <string name="locatePatient">Locate Patient</string>
-    <string name="patient">Patient</string>
+    <string name="user">Patient</string>
     <string name="responsible">Responsible</string>
 
 
@@ -47,5 +47,11 @@
     <string name="internet_tittle">Internet Connection</string>
     <string name="internet_body">There\'s no internet connection. Please turn on WiFi or Mobile data.</string>
     <string name="logout">logout</string>
+    <string name="name_header">Name</string>
+    <string name="birthdate_header">BirthDate</string>
+    <string name="phone_header">Phone</string>
+    <string name="address_header">Address</string>
+    <string name="loading">Loading...</string>
+    <string name="update">Update</string>
 
 </resources>

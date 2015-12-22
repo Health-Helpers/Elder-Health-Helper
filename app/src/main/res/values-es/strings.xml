@@ -4,7 +4,7 @@
     <string name="welcomeMsg">Bienvenido</string>
     <string name="check_number">Comprobando su número</string>
 
-    <string name="patient">Paciente</string>
+    <string name="user">Paciente</string>
     <string name="responsible">Responsable</string>
     <string name="welcomeResp">Bienvenido a la APP del responsable</string>
 
@@ -42,5 +42,10 @@
     <!-- INTERNET -->
     <string name="internet_tittle">Conexión a Internet</string>
     <string name="internet_body">No hay conexión a internet disponible</string>
+    <string name="name_header">Nombre</string>
+    <string name="birthdate_header">Fecha de nacimiento</string>
+    <string name="phone_header">Teléfono</string>
+    <string name="loading">Loading...</string>
+    <string name="update">Update</string>
 
 </resources>

@@ -1,18 +1,27 @@
 package com.hh.ehh.responsible;
 
+import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ListAdapter;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
+import com.android.volley.VolleyError;
 import com.hh.ehh.R;
 import com.hh.ehh.adapters.MedicalCenterAdapter;
+import com.hh.ehh.model.MedicalCenter;
+import com.hh.ehh.networking.RestWebServiceConnection;
 import com.hh.ehh.utils.FragmentStackManager;
+import com.hh.ehh.utils.json.JSONParser;
 
-import java.util.ArrayList;
+import org.json.JSONException;
+
 import java.util.List;
 
 /**
@@ -22,15 +31,15 @@ public class MedicalCentersListFragment extends Fragment {
 
     protected FragmentStackManager fragmentStackManager;
     private ListView medicalCentersList;
+    private ProgressDialog pDialog;
 
     public MedicalCentersListFragment() {
-        // Empty constructor required for fragment subclasses
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.responsible_medical_centers_list_fragment, container,false);
+        View view = inflater.inflate(R.layout.responsible_medical_centers_list_fragment, container, false);
         medicalCentersList = (ListView) view.findViewById(R.id.medicalCentersList);
         return view;
     }
@@ -38,31 +47,66 @@ public class MedicalCentersListFragment extends Fragment {
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-//        setHasOptionsMenu(true);
-//        updateUI();
+        setHasOptionsMenu(true);
         fragmentStackManager = FragmentStackManager.getInstance(getActivity());
-        medicalCentersList.setAdapter(fillAdapter());
-       /* medicalCentersList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        populateUI();
+        medicalCentersList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Patient patient = (Patient) medicalCentersList.getItemAtPosition(position);
-                PatientFragment fragment = new PatientFragment();
-                Bundle args = new Bundle();
-                args.putString(PatientFragment.ARG_PATIENT_NUMBER, patient.getNickName());
-                fragment.setArguments(args);
-                fragmentStackManager.loadFragment(fragment,R.id.responsiblePatientFrame);
+                MedicalCenter medicalCenter = (MedicalCenter) medicalCentersList.getItemAtPosition(position);
+                MedicalCenterFragment fragment = MedicalCenterFragment.newInstance(medicalCenter);
+                fragmentStackManager.loadFragment(fragment, R.id.responsiblePatientFrame);
             }
-        });*/
+        });
     }
 
-    private ListAdapter fillAdapter() {
-        List<String> medicalCenters = new ArrayList<>();
-        medicalCenters.add("Medical Center 1");
-        medicalCenters.add("Medical Center 2");
-        medicalCenters.add("Medical Center 3");
-        medicalCenters.add("Medical Center 4");
-        medicalCenters.add("Medical Center 5");
-         return new MedicalCenterAdapter(getActivity(),medicalCenters);
+    private void fillAdapter(List<MedicalCenter> medicalCenters) {
+        medicalCentersList.setAdapter(new MedicalCenterAdapter(getActivity(), medicalCenters));
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
+        inflater.inflate(R.menu.update_menu, menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.refresh:
+                populateUI();
+                break;
+            default:
+                break;
+        }
+        return true;
+    }
+
+    private void populateUI() {
+        RestWebServiceConnection connection = RestWebServiceConnection.getInstance(getActivity());
+        connection.getMedicalCentersList(new RestWebServiceConnection.CustomListener<String>() {
+            @Override
+            public void onSucces(String response) {
+                List<MedicalCenter> medicalCenters = null;
+                pDialog = new ProgressDialog(getActivity());
+                pDialog.setMessage(getActivity().getResources().getString(R.string.loading));
+                pDialog.show();
+                try {
+                    medicalCenters = JSONParser.getAllMedicalCentersFromJSON(response);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                if (medicalCenters != null && !medicalCenters.isEmpty())
+                    fillAdapter(medicalCenters);
+                if(pDialog!=null)
+                    pDialog.dismiss();
+            }
+
+            @Override
+            public void onError(VolleyError error) {
+
+            }
+        });
     }
 
 }

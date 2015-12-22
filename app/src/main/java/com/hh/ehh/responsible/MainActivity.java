@@ -2,8 +2,8 @@ package com.hh.ehh.responsible;
 
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.content.pm.ActivityInfo;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
@@ -17,9 +17,13 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.hh.ehh.R;
+import com.hh.ehh.database.DataBaseSQLiteHelper;
+import com.hh.ehh.database.managers.ProfileDatabaseManager;
+import com.hh.ehh.model.Profile;
 import com.hh.ehh.ui.customdialogs.CustomDialogs;
 import com.hh.ehh.ui.profile.ProfileFragment;
 import com.hh.ehh.utils.FragmentStackManager;
@@ -31,6 +35,9 @@ public class MainActivity extends AppCompatActivity {
     protected FragmentStackManager fragmentStackManager;
     private NavigationView navigationView;
     private ResponsibleHomeFragment responsibleHomeFragment;
+    private DataBaseSQLiteHelper dbHelper = null;
+    private SQLiteDatabase database = null;
+    private Profile profile = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,80 +49,70 @@ public class MainActivity extends AppCompatActivity {
         fragmentStackManager = FragmentStackManager.getInstance(this);
         fragmentStackManager.loadFragment(responsibleHomeFragment,R.id.responsiblePatientFrame);
         toolbar.setLogo(R.mipmap.ic_ehh);
+        setDatabase();
+    }
+
+    private void setDatabase() {
+        dbHelper = DataBaseSQLiteHelper.newInstance(getApplicationContext());
+        database = dbHelper.getWritableDatabase();
     }
 
     private void initView() {
-        // Initializing Toolbar and setting it as the actionbar
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        //Initializing NavigationView
         navigationView = (NavigationView) findViewById(R.id.navigation_view);
-        //Setting Navigation View Item Selected Listener to handle the item click of the navigation menu
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
-
             // This method will trigger on item Click of navigation menu
             @Override
             public boolean onNavigationItemSelected(MenuItem menuItem) {
-
-
-                //Checking if the item is in checked state or not, if not make it in checked state
                 if (menuItem.isChecked()) menuItem.setChecked(false);
                 else menuItem.setChecked(true);
-
-                //Closing drawer on item click
                 drawerLayout.closeDrawers();
-
                 //Check to see which item was being clicked and perform appropriate action
                 switch (menuItem.getItemId()) {
-
                     default:
                         Toast.makeText(getApplicationContext(), "Somethings Wrong", Toast.LENGTH_SHORT).show();
                         return true;
-
                 }
             }
         });
 
-        // Initializing Drawer Layout and ActionBarToggle
         drawerLayout = (DrawerLayout) findViewById(R.id.drawer);
         ActionBarDrawerToggle actionBarDrawerToggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.openDrawer, R.string.closeDrawer) {
-
             @Override
             public void onDrawerClosed(View drawerView) {
-                // Code here will be triggered once the drawer closes as we dont want anything to happen so we leave this blank
                 super.onDrawerClosed(drawerView);
             }
 
             @Override
             public void onDrawerOpened(View drawerView) {
-                // Code here will be triggered once the drawer open as we dont want anything to happen so we leave this blank
-
                 super.onDrawerOpened(drawerView);
             }
         };
-
-        //Setting the actionbarToggle to drawer layout
         drawerLayout.setDrawerListener(actionBarDrawerToggle);
-
-        //calling sync state is necessay or else your hamburger icon wont show up
         actionBarDrawerToggle.syncState();
     }
 
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        //   getMenuInflater().inflate(R.menu.menu_main, menu);
-
-
         View v = findViewById(R.id.header_view);
         Context context = v.getContext();
+        final Profile profile = getProfileFromDatabase(database);
+        if(profile != null && v!=null) {
+            TextView name = (TextView) v.findViewById(R.id.username);
+            TextView email = (TextView) v.findViewById(R.id.email);
+            name.setText(profile.getName());
+            email.setText(profile.getEmail());
+        }
 
         v.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Fragment profile = new ProfileFragment();
-                fragmentStackManager.loadFragment(profile, R.id.responsiblePatientFrame);
+                if(profile!=null) {
+                    Fragment profileFragment = ProfileFragment.newInstance(profile);
+                    fragmentStackManager.loadFragment(profileFragment, R.id.responsiblePatientFrame);
+                }
                 closeDrawer();
             }
         });
@@ -177,10 +174,7 @@ public class MainActivity extends AppCompatActivity {
 
 
     private void selectItem(int position) {
-
         Fragment fragment;
-        Intent intents = null;
-
         switch (position)
         {
             case 1:
@@ -238,7 +232,21 @@ public class MainActivity extends AppCompatActivity {
         return state;
     }
 
-    /* The click listner for ListView in the navigation drawer */
+    private Profile getProfileFromDatabase(SQLiteDatabase database) {
+        Profile dbProfile = null;
+        if(database!=null){
+            dbProfile = ProfileDatabaseManager.getProfile(database);
+            dbProfile = new Profile("1","Juan","Perez","juanperez@gmail.com","Lleida",null,"973234323");
+        }
+        /*Must be removed*/
+        else{
+            dbProfile = new Profile("1","Juan","Perez","juanperez@gmail.com","Lleida",null,"973234323");
+            profile = dbProfile;
+        }
+
+        return dbProfile;
+    }
+
     private class DrawerItemClickListener implements ListView.OnItemClickListener {
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {

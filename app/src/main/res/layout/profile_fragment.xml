@@ -68,6 +68,6 @@
         android:layout_above="@+id/informations_container"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="-16dp"
-        android:src="@drawable/android" />
+        android:src="@drawable/profile" />
 
 </RelativeLayout>

@@ -8,7 +8,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.telephony.TelephonyManager;
 import android.widget.TextView;
 
-import com.hh.ehh.R;
 import com.hh.ehh.responsible.MainActivity;
 import com.hh.ehh.sms.SMSReceiver;
 import com.hh.ehh.utils.SharedPrefsConstants;
@@ -42,8 +41,8 @@ public class LoginActivity extends AppCompatActivity {
 //            finish();
 //        } else {
 //            String phoneNumber = checkPhoneNumber();
-//            WebServiceConnection webServiceConnection = WebServiceConnection.getInstance(getApplicationContext());
-//            webServiceConnection.phoneNumberValidation(phoneNumber, new WebServiceConnection.CustomListener<String>(){
+//            RestWebServiceConnection webServiceConnection = RestWebServiceConnection.getInstance(getApplicationContext());
+//            webServiceConnection.phoneNumberValidation(phoneNumber, new RestWebServiceConnection.CustomListener<String>(){
 //
 //                @Override
 //                public void onSucces(String response) {

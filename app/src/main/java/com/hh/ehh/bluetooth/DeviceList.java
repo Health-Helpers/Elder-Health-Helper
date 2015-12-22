@@ -3,7 +3,6 @@ package com.hh.ehh.bluetooth;
 /**
  * Created by Carolina on 20/12/2015.
  */
-import java.util.Set;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -16,17 +15,18 @@ import android.content.IntentFilter;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.view.Window;
 import android.view.View.OnClickListener;
+import android.view.Window;
 import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.FrameLayout;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.AdapterView.OnItemClickListener;
 
 import com.hh.ehh.R;
+
+import java.util.Set;
 
 @SuppressLint("NewApi")
 public class DeviceList extends Activity {
@@ -57,7 +57,7 @@ public class DeviceList extends Activity {
         setResult(Activity.RESULT_CANCELED);
 
         // Initialize the button to perform device discovery
-        /*scanButton = (Button) findViewById(R.id.button_scan);
+        scanButton = (Button) findViewById(R.id.button_scan);
         String strScanDevice = getIntent().getStringExtra("scan_for_devices");
         if(strScanDevice == null)
             strScanDevice = "SCAN FOR DEVICES";
@@ -67,7 +67,7 @@ public class DeviceList extends Activity {
                 doDiscovery();
             }
         });
-        */
+
         // Initialize array adapters. One for already paired devices
         // and one for newly discovered devices
         int layout_text = getIntent().getIntExtra("layout_text", R.layout.device_name);
@@ -94,10 +94,13 @@ public class DeviceList extends Activity {
         pairedDevices = mBtAdapter.getBondedDevices();
 
         // If there are paired devices, add each one to the ArrayAdapter
+        /*****Comentar el if si el dispositivo no tiene bluetooth*/
         if (pairedDevices.size() > 0) {
             for (BluetoothDevice device : pairedDevices) {
                 //mPairedDevicesArrayAdapter.add(device.getName() + "\n" + device.getAddress());
+
                 if(device.getAddress().equals("20:14:02:17:10:85"))
+           //     if(device.getAddress().equals("9C:F3:87:AB:AA:09"))
                 {
                     mPairedDevicesArrayAdapter.add("EHH Button" + "\n" + device.getAddress());
                 }

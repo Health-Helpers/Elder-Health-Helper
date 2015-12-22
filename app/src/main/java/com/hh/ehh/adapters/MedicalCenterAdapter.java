@@ -8,6 +8,7 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.hh.ehh.R;
+import com.hh.ehh.model.MedicalCenter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,28 +16,28 @@ import java.util.List;
 
 public class MedicalCenterAdapter extends BaseAdapter {
 
-    private List<String> patients;
+    private List<MedicalCenter> medicalCenters;
     private Context context;
 
     public MedicalCenterAdapter(Context context) {
         this.context = context;
-        this.patients = new ArrayList<>();
+        this.medicalCenters = new ArrayList<>();
     }
 
-    public MedicalCenterAdapter(Context context, List<String> list) {
+    public MedicalCenterAdapter(Context context, List<MedicalCenter> list) {
         this.context = context;
-        this.patients = list;
+        this.medicalCenters = list;
     }
 
 
     @Override
     public int getCount() {
-        return patients.size();
+        return medicalCenters.size();
     }
 
     @Override
     public Object getItem(int position) {
-        return patients.get(position);
+        return medicalCenters.get(position);
     }
 
     @Override
@@ -59,9 +60,9 @@ public class MedicalCenterAdapter extends BaseAdapter {
             holder = (MedicalCenterHolder) view.getTag();
         }
 
-        String medicalCenter = (String) this.getItem(position);
+        MedicalCenter medicalCenter = (MedicalCenter) this.getItem(position);
 
-        holder.name.setText(medicalCenter);
+        holder.name.setText(medicalCenter.getName());
         return view;
     }
 

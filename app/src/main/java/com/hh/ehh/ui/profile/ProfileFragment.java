@@ -16,18 +16,18 @@ import com.hh.ehh.model.Profile;
 
 
 public class ProfileFragment extends Fragment {
-//    private static final String PROFILE_KEY = "PROFILE";
-    private Profile profile;
+    private static final String PROFILE_KEY = "PROFILE";
+    private Profile dbProfile;
     private ImageView avatar;
     private TextView name, mail, city;
 
-//    public static ProfileFragment newInstance(Profile profile) {
-//        ProfileFragment fragment = new ProfileFragment();
-//        Bundle bundle = new Bundle();
-//        bundle.putParcelable(PROFILE_KEY, profile);
-//        fragment.setArguments(bundle);
-//        return fragment;
-//    }
+    public static ProfileFragment newInstance(Profile profile) {
+        ProfileFragment fragment = new ProfileFragment();
+        Bundle bundle = new Bundle();
+        bundle.putParcelable(PROFILE_KEY, profile);
+        fragment.setArguments(bundle);
+        return fragment;
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -44,11 +44,13 @@ public class ProfileFragment extends Fragment {
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        profile = new Profile("Pedro Perez","test@gmail.com","Neverland","No path");
+        if(dbProfile==null){
+            dbProfile = new Profile("1","Juan","Perez","juanperez@gmail.com","Lleida",null,"973234323");
+        }
         //avatar.setImageDrawable(profile.getImageAsDrawable());
-        name.setText(profile.getName());
-        mail.setText(profile.getEmail());
-        city.setText(profile.getLocation());
+        name.setText(dbProfile.getName());
+        mail.setText(dbProfile.getEmail());
+        city.setText(dbProfile.getLocation());
        setHasOptionsMenu(true);
     }
 
