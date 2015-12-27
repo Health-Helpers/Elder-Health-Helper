@@ -8,8 +8,8 @@ import android.os.Bundle;
 import android.telephony.SmsMessage;
 import android.util.Log;
 
-import com.hh.ehh.LoginActivity;
 import com.hh.ehh.R;
+import com.hh.ehh.ui.main.LoginActivity;
 
 public class SMSReceiver extends BroadcastReceiver {
     public static final String SMS = "SMS";

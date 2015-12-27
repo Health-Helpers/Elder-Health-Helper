@@ -1,0 +1,153 @@
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent" android:paddingLeft="0dp"
+    android:paddingRight="0dp"
+    android:paddingTop="0dp"
+    android:paddingBottom="0dp"  tools:context=".ui.main.MainActivity"
+    android:orientation="vertical">
+
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="4">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/imageView3"
+            android:layout_weight="4"
+            android:src="@drawable/profile"
+            android:layout_margin="4dp" />
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="3"
+            android:gravity="center_vertical">
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/locatePatient"
+                android:id="@+id/localizePatientBtn"
+                android:layout_gravity="center_horizontal"
+                android:textColor="#ffffff"
+                android:background="@color/ButtonColor"
+                android:drawableLeft="@android:drawable/ic_dialog_map"
+                android:paddingLeft="30dip"
+                android:paddingRight="26dip"
+                android:textSize="20sp"
+                android:textAllCaps="false"
+                android:layout_weight="2"
+                android:layout_margin="10dp" />
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/call"
+                android:id="@+id/responsibleCallBtn"
+                android:layout_gravity="center_horizontal"
+                android:textColor="#ffffff"
+                android:textSize="20sp"
+                android:drawableLeft="@android:drawable/stat_sys_phone_call"
+                android:paddingLeft="30dip"
+                android:paddingRight="26dip"
+                android:textAllCaps="false"
+                android:background="@color/ButtonColor"
+                android:layout_weight="2"
+                android:layout_margin="10dp" />
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/patientSettings"
+                android:id="@+id/patientSettingsBtn"
+                android:layout_gravity="center_horizontal"
+                android:textColor="#ffffff"
+                android:textSize="20sp"
+                android:drawableLeft="@drawable/ic_setting_dark"
+                android:paddingLeft="30dip"
+                android:paddingRight="26dip"
+                android:textAllCaps="false"
+                android:background="@color/ButtonColor"
+                android:layout_weight="2"
+                android:layout_margin="10dp" />
+
+        </LinearLayout>
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="#000" />
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="3"
+        android:gravity="top|bottom"
+        android:padding="8dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Name"
+            android:textStyle="bold"
+            android:textSize="20sp"
+            android:id="@+id/name_header" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:textSize="18sp"
+            android:text="Juan antonio de la venda sacada"
+            android:id="@+id/name_value" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Birthday"
+            android:textStyle="bold"
+            android:textSize="20sp"
+            android:id="@+id/birthdate_header" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:textSize="18sp"
+            android:text="01/01/1991"
+            android:id="@+id/birthdate_value" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Phone number"
+            android:textStyle="bold"
+            android:textSize="20sp"
+            android:id="@+id/phone_header" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:textSize="18sp"
+            android:text="+34 973123123"
+            android:id="@+id/phone_value" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Address"
+            android:textStyle="bold"
+            android:textSize="20sp"
+            android:id="@+id/address_header" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:textSize="18sp"
+            android:text="Calle que se ve de lejos pero esta cerca 1 2 3"
+            android:id="@+id/address_value" />
+
+    </LinearLayout>
+</LinearLayout>
+
