@@ -48,6 +48,10 @@ public class User {
                 address == null;
     }
 
+    public String getFullName(){
+        return this.getName() + " " + this.getSurname();
+    }
+
     public String getId() {
         return id;
     }

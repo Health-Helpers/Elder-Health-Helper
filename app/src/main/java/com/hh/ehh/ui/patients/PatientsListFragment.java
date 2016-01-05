@@ -20,7 +20,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.hh.ehh.R;
-import com.hh.ehh.adapters.adapterListeners.RecyclerItemClickListener;
 import com.hh.ehh.model.Patient;
 import com.hh.ehh.model.Profile;
 import com.hh.ehh.networking.SoapWebServiceConnection;
@@ -73,16 +72,6 @@ public class PatientsListFragment extends Fragment {
         getActivity().setTitle(getActivity().getResources().getString(R.string.app_name));
         populateUI(profile);
         fragmentStackManager = FragmentStackManager.getInstance(getActivity());
-        rv.addOnItemTouchListener(
-                new RecyclerItemClickListener(getActivity(), new RecyclerItemClickListener.OnItemClickListener() {
-                    @Override
-                    public void onItemClick(View view, int position) {
-                        Patient patient = parallaxRecyclerAdapter.getData().get(position - 1);
-                        PatientFragment fragment = PatientFragment.newInstance(patient);
-                        fragmentStackManager.loadFragment(fragment, R.id.responsiblePatientFrame);
-                    }
-                })
-        );
         refreshLayout.setOnRefreshListener(
                 new SwipeRefreshLayout.OnRefreshListener() {
                     @Override
@@ -104,7 +93,7 @@ public class PatientsListFragment extends Fragment {
             public void onBindViewHolderImpl(RecyclerView.ViewHolder viewHolder, ParallaxRecyclerAdapter<Patient> parallaxRecyclerAdapter, int i) {
                 Patient patient = parallaxRecyclerAdapter.getData().get(i);
                 PatientHolder patientHolder = (PatientHolder) viewHolder;
-                patientHolder.personName.setText(patient.getName());
+                patientHolder.personName.setText(patient.getFullName());
                 patientHolder.personDisease.setText(patient.getDiseases());
                 patientHolder.personPhoto.setImageDrawable(ContextCompat.getDrawable(getActivity().getApplicationContext(), R.drawable.profile));
             }
@@ -120,6 +109,14 @@ public class PatientsListFragment extends Fragment {
             }
         };
         parallaxRecyclerAdapter.setParallaxHeader(getActivity().getLayoutInflater().inflate(R.layout.patient_list_header_layout, rv, false), rv);
+        parallaxRecyclerAdapter.setOnClickEvent(new ParallaxRecyclerAdapter.OnClickEvent() {
+            @Override
+            public void onClick(View view, int position) {
+                Patient patient = parallaxRecyclerAdapter.getData().get(position);
+                PatientFragment fragment = PatientFragment.newInstance(patient);
+                fragmentStackManager.loadFragment(fragment, R.id.responsiblePatientFrame);
+            }
+        });
         rv.setAdapter(parallaxRecyclerAdapter);
     }
 
@@ -202,9 +199,9 @@ public class PatientsListFragment extends Fragment {
         protected void onPostExecute(List<Patient> patientList) {
             super.onPostExecute(patientList);
 //          DELETE FOLLOWING MOCK LINES
-            List<Patient> patients = patientList;
-            patients.addAll(patientList);
-            patients.addAll(patientList);
+//            List<Patient> patients = patientList;
+//            patients.addAll(patientList);
+//            patients.addAll(patientList);
             if (patientList != null)
                 fillAdapter(patientList);
             dialog.cancel();
