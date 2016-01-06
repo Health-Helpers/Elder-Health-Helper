@@ -28,6 +28,12 @@ import com.hh.ehh.ui.profile.ProfileFragment;
 import com.hh.ehh.ui.settings.ResponsibleSettingsFragment;
 import com.hh.ehh.utils.FragmentStackManager;
 
+import com.parse.Parse;
+import com.parse.ParseACL;
+import com.parse.ParseInstallation;
+import com.parse.ParseUser;
+
+
 public class MainActivity extends AppCompatActivity {
 
     protected Toolbar toolbar;
@@ -51,6 +57,21 @@ public class MainActivity extends AppCompatActivity {
         toolbar.setLogo(R.mipmap.ic_ehh);
         setDatabase();
         profile = getProfileFromDatabase(database);
+
+
+        /****Push Notifications*****/
+        // Enable Local Datastore.
+        Parse.enableLocalDatastore(this);
+
+        // Add your initialization code here
+        Parse.initialize(this, "EN7vHyPVXjePOwhyvwSi4s43DHbrixZxqM1cIs4V", "IY3nN0FgC6wQDVdwJulIf2DXMR7nFFOQmWSxbiTL");
+        ParseInstallation.getCurrentInstallation().saveInBackground();
+
+        ParseUser.enableAutomaticUser();
+        ParseACL defaultACL = new ParseACL();
+        // Optionally enable public read access.
+        // defaultACL.setPublicReadAccess(true);
+        ParseACL.setDefaultACL(defaultACL, true);
     }
 
     private void setDatabase() {
