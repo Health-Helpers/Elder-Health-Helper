@@ -19,7 +19,6 @@ import android.widget.TextView;
 
 import com.android.volley.VolleyError;
 import com.hh.ehh.R;
-import com.hh.ehh.adapters.adapterListeners.RecyclerItemClickListener;
 import com.hh.ehh.model.MedicalCenter;
 import com.hh.ehh.networking.RestWebServiceConnection;
 import com.hh.ehh.utils.FragmentStackManager;
@@ -63,16 +62,6 @@ public class MedicalCentersListFragment extends Fragment {
         getActivity().setTitle(getActivity().getResources().getString(R.string.app_name));
         populateUI();
         fragmentStackManager = FragmentStackManager.getInstance(getActivity());
-        rv.addOnItemTouchListener(
-                new RecyclerItemClickListener(getActivity(), new RecyclerItemClickListener.OnItemClickListener() {
-                    @Override
-                    public void onItemClick(View view, int position) {
-                        MedicalCenter medicalCenter = parallaxRecyclerAdapter.getData().get(position);
-                        MedicalCenterFragment fragment = MedicalCenterFragment.newInstance(medicalCenter);
-                        fragmentStackManager.loadFragment(fragment, R.id.responsiblePatientFrame);
-                    }
-                })
-        );
         refreshLayout.setOnRefreshListener(
                 new SwipeRefreshLayout.OnRefreshListener() {
                     @Override
@@ -104,6 +93,14 @@ public class MedicalCentersListFragment extends Fragment {
             }
         };
         parallaxRecyclerAdapter.setParallaxHeader(getActivity().getLayoutInflater().inflate(R.layout.medical_center_list_header_layout, rv, false), rv);
+        parallaxRecyclerAdapter.setOnClickEvent(new ParallaxRecyclerAdapter.OnClickEvent() {
+            @Override
+            public void onClick(View view, int position) {
+                MedicalCenter medicalCenter = parallaxRecyclerAdapter.getData().get(position);
+                MedicalCenterFragment fragment = MedicalCenterFragment.newInstance(medicalCenter);
+                fragmentStackManager.loadFragment(fragment, R.id.responsiblePatientFrame);
+            }
+        });
         rv.setAdapter(parallaxRecyclerAdapter);    }
 
     @Override
@@ -124,20 +121,6 @@ public class MedicalCentersListFragment extends Fragment {
         return true;
     }
 
-    private class MedicalCenterHolder extends RecyclerView.ViewHolder {
-        CardView cv;
-        TextView medicalCenterName;
-        ImageView medicalCenterPhoto;
-
-        public MedicalCenterHolder(View itemView) {
-            super(itemView);
-            cv = (CardView) itemView.findViewById(R.id.cv);
-            medicalCenterName = (TextView) itemView.findViewById(R.id.medical_center_name);
-            medicalCenterPhoto = (ImageView) itemView.findViewById(R.id.medical_center_image);
-        }
-    }
-
-
     private void populateUI() {
         RestWebServiceConnection connection = RestWebServiceConnection.getInstance(getActivity());
         connection.getMedicalCentersList(new RestWebServiceConnection.CustomListener<String>() {
@@ -152,8 +135,6 @@ public class MedicalCentersListFragment extends Fragment {
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
-                if (medicalCenters != null && !medicalCenters.isEmpty())
-                    medicalCenters.addAll(medicalCenters);
                 fillAdapter(medicalCenters);
                 if (pDialog != null)
                     pDialog.dismiss();
@@ -166,5 +147,18 @@ public class MedicalCentersListFragment extends Fragment {
 
             }
         });
+    }
+
+    private class MedicalCenterHolder extends RecyclerView.ViewHolder {
+        CardView cv;
+        TextView medicalCenterName;
+        ImageView medicalCenterPhoto;
+
+        public MedicalCenterHolder(View itemView) {
+            super(itemView);
+            cv = (CardView) itemView.findViewById(R.id.cv);
+            medicalCenterName = (TextView) itemView.findViewById(R.id.medical_center_name);
+            medicalCenterPhoto = (ImageView) itemView.findViewById(R.id.medical_center_image);
+        }
     }
 }

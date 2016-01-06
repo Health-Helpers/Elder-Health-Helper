@@ -3,7 +3,6 @@ package com.hh.ehh.ui.patients;
 
 import android.content.Context;
 import android.content.res.Resources;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -15,13 +14,7 @@ import android.widget.Toast;
 
 import com.hh.ehh.R;
 import com.hh.ehh.model.Patient;
-import com.hh.ehh.networking.SoapWebServiceConnection;
 import com.hh.ehh.utils.FragmentStackManager;
-import com.hh.ehh.utils.xml.XMLHandler;
-
-import org.xmlpull.v1.XmlPullParserException;
-
-import java.io.IOException;
 
 public class PatientFragment extends Fragment {
     public static final String ARG_PATIENT_NUMBER = "patient_number";
@@ -101,34 +94,10 @@ public class PatientFragment extends Fragment {
     }
 
     private void updateUI(Patient patient) {
-        name.setText(patient.getName());
+        name.setText(patient.getFullName());
         birthdate.setText(patient.getBirthDate());
         phone.setText(patient.getPhone());
         address.setText(patient.getAddress());
         getActivity().setTitle(patient.getName());
-    }
-
-    private class GetPatient extends AsyncTask<String, Void, Patient> {
-        public GetPatient() {
-        }
-
-        @Override
-        protected Patient doInBackground(String[] params) {
-            SoapWebServiceConnection connection = SoapWebServiceConnection.getInstance(getActivity());
-            String rawXML = connection.getPatient(params[0]);
-            Patient patient = null;
-            try {
-                patient = XMLHandler.getPatientFromXML(rawXML);
-            } catch (XmlPullParserException | IOException e) {
-                e.printStackTrace();
-            }
-            return patient;
-        }
-
-        @Override
-        protected void onPostExecute(Patient patient) {
-            super.onPostExecute(patient);
-            updateUI(patient);
-        }
     }
 }
