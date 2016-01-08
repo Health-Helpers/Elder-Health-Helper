@@ -5,6 +5,10 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.support.annotation.NonNull;
 
+import com.hh.ehh.model.Profile;
+import com.hh.ehh.model.User;
+import com.parse.ParseInstallation;
+
 import org.ksoap2.SoapEnvelope;
 import org.ksoap2.serialization.SoapObject;
 import org.ksoap2.serialization.SoapSerializationEnvelope;
@@ -15,7 +19,6 @@ import org.ksoap2.transport.HttpTransportSE;
  */
 public class SoapWebServiceConnection {
     private static SoapWebServiceConnection mConnection = null;
-    private Context context;
     private static String ADD_PATIENT_TO_RESPONSIBLE = "addPatientToResponsible";
     private static String ADD_RESPONSIBLE_TO_PATIENT = "addResponsibleToPatient";
     private static String CREATE_PATIENT = "createPatient";
@@ -30,11 +33,15 @@ public class SoapWebServiceConnection {
     private static String UPDATE_PATIENT = "updatePatient";
     private static String UPDATE_RESPONSIBLE = "updateResponsible";
     private static String GET_RESPONSIBLE_PATIENTS = "getResponsiblePatients";
-
     private static String NAMESPACE = "http://ws.ehh.cat/";
     private static String SOAP_WS_CONTROLLER = "/SoapWSController";
     private static String SOAP_ACTION = NAMESPACE + SOAP_WS_CONTROLLER;
     private static String URL = "http://alumnes-grp04.udl.cat/EHHWeb" + SOAP_WS_CONTROLLER;
+    private Context context;
+
+    public SoapWebServiceConnection(Context context) {
+        this.context = context;
+    }
 
     public static boolean checkInternetConnection(Context context) {
         ConnectivityManager connMgr = (ConnectivityManager)
@@ -43,16 +50,13 @@ public class SoapWebServiceConnection {
         return networkInfo != null && networkInfo.isConnected();
     }
 
-    public SoapWebServiceConnection(Context context) {
-        this.context = context;
-    }
-
     public static SoapWebServiceConnection getInstance(Context context) {
         if (mConnection == null) {
             mConnection = new SoapWebServiceConnection(context);
         }
         return mConnection;
     }
+
 
     /***********************************************************
      * GET
@@ -98,4 +102,11 @@ public class SoapWebServiceConnection {
         }
     }
 
+    /***********************************************************
+     * POST
+     ***********************************************************/
+    public void postPattient(Profile profile, User patient) {
+        String parseID = ParseInstallation.getCurrentInstallation().getInstallationId();
+
+    }
 }

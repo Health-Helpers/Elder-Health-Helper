@@ -3,35 +3,17 @@
     <string name="app_name">Elder Health Helper</string>
     <string name="welcomeMsg">Bienvenido</string>
     <string name="check_number">Comprobando su número</string>
-
-    <string name="user">Paciente</string>
-    <string name="responsible">Responsable</string>
-    <string name="welcomeResp">Bienvenido a la APP del responsable</string>
+    <string name="phone_number">654321123</string>
 
     <string name="closeDrawer">Navigation View</string>
-    <string name="openDrawer">Navigation View Cerrado</string>
-    <string name="app_not_available">Disculpe, no hay navegador web disponible</string>
+    <string name="openDrawer">Navigation View Closed</string>
 
-    <string name="phone_number">654321123</string>
-    <string name="Accept">Aceptar</string>
-    <string name="action_websearch"></string>
-    <string name="call">Llamada</string>
-    <string name="cancel">Cancelar</string>
-    <string name="close">Salir</string>
-    <string name="close_body">Quiere salir de la aplicación?</string>
-    <string name="locatePatient">Localizar Paciente</string>
-    <string name="logout">Salir</string>
-    <string name="pair">Emparejar Botón</string>
+    <!-- Patient options-->
     <string name="patientSettings">Ajustes Paciente</string>
     <string name="patientSettingsAlert">Alertas</string>
-    <string name="patientSettingsName">Nombre</string>
     <string name="patientSettingsZone">Zona Segura</string>
-    <string name="responsibleSettingsChange">Otros Ajustes</string>
-    <string name="responsibleSettingsChangeIdiom">Cambiar idioma</string>
-    <string name="responsibleSettingsNewPatient">Nuevo Paciente</string>
-    <string name="responsibleSettingsNewResponsible">Nuevo Responsable</string>
-    <string name="settings">Ajustes</string>
-
+    <string name="locatePatient">Localizar Paciente</string>
+    <string name="call">Call</string>
 
     <!-- MENU -->
     <string name="home">Inicio</string>
@@ -39,20 +21,50 @@
     <string name="medicalCenters">Centros Medicos</string>
     <string name="configuration">Configuración</string>
 
+
+    <!-- CLOSE DIALOG-->
+    <string name="close">Salir</string>
+    <string name="close_body">Desea salir de la aplicación?</string>
+    <string name="Accept">Aceptar</string>
+    <string name="cancel">Cancelar</string>
+
     <!-- INTERNET -->
     <string name="internet_tittle">Conexión a Internet</string>
     <string name="internet_body">No hay conexión a internet disponible</string>
+    <string name="internet_tittle">Internet Connection</string>
+    <string name="logout">Cerrar sessión</string>
+
+    <!-- Patients-->
+    <string name="request_patient">Enviar petición</string>
     <string name="name_header">Nombre</string>
     <string name="birthdate_header">Fecha de nacimiento</string>
     <string name="phone_header">Teléfono</string>
     <string name="address_header">Dirección</string>
+    <string name="surname_header">Apellidos</string>
+
+    <string name="add_patient_header">Este es un formulario para añadir un nuevo paciente bajo su supervisión. Puede tardar entre 24 y 48 horas. Gracias por su paciencia.</string>
+    <string name="add_patient">Nuevo paciente</string>
+    <string name="wrong_dni">DNI incorrecto. Ex. (12345678X)</string>
+    <string name="wrong_name">El campo nombre no puede estar vacío.</string>
+    <string name="wrong_surnames">El campo apellidos no puede estar vacío.</string>
+    <string name="wrong_phone">El campo telefono debe tener almenos 9 dígitos.</string>
+    <string name="wrong_address">El campo dirección no puede estar vacío.</string>
+
+    <!-- Dialogs -->
     <string name="loading">Cargando…</string>
-    <string name="update">Actualizar</string>
     <string name="alert">Alerta</string>
     <string name="please_wait">Cargando datos… Porfavor espere.</string>
+
+    <!-- TopMenuItems-->
+    <string name="update">Actualizar</string>
+
+    <!-- Register-->
     <string name="new_user">Teléfono</string>
     <string name="new_user_body">Introduzca su número de teléfono y DNI</string>
+    <string name="dni_header">DNI or NIF</string>
     <string name="login">Iniciar sesión</string>
-    <string name="news">News</string>
+
+    <!-- News-->
+    <string name="news">Notícias</string>
 
 </resources>

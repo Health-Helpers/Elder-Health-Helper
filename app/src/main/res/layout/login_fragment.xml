@@ -5,11 +5,11 @@
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="match_parent"
+        android:layout_alignParentTop="true"
         android:orientation="vertical"
         android:paddingLeft="20dp"
         android:paddingRight="20dp"
-        android:paddingTop="60dp"
-        android:layout_alignParentTop="true">
+        android:paddingTop="60dp">
 
         <android.support.design.widget.TextInputLayout
             android:id="@+id/input_layout_name"
@@ -20,9 +20,9 @@
                 android:id="@+id/input_phone"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:singleLine="true"
+                android:hint="@string/phone_header"
                 android:inputType="phone"
-                android:hint="@string/phone_header" />
+                android:singleLine="true" />
         </android.support.design.widget.TextInputLayout>
 
         <android.support.design.widget.TextInputLayout
@@ -34,16 +34,16 @@
                 android:id="@+id/input_dni"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="number"
-                android:hint="@string/dni_header" />
+                android:hint="@string/dni_header"
+                android:inputType="number" />
         </android.support.design.widget.TextInputLayout>
 
         <Button android:id="@+id/btn_signup"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:text="@string/login"
-            android:background="@color/PrimaryColor"
             android:layout_marginTop="40dp"
+            android:background="@color/PrimaryColor"
+            android:text="@string/login"
             android:textColor="@android:color/white"/>
     </LinearLayout>
 
