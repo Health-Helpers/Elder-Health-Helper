@@ -64,7 +64,7 @@ public class MainActivity extends AppCompatActivity {
         Parse.enableLocalDatastore(this);
 
         // Add your initialization code here
-        Parse.initialize(this, "EN7vHyPVXjePOwhyvwSi4s43DHbrixZxqM1cIs4V", "IY3nN0FgC6wQDVdwJulIf2DXMR7nFFOQmWSxbiTL");
+        Parse.initialize(this, "l3gHQ5XzYri2jGFACJkZKiupEHe3xDF2MgoRbrz4", "rppSTdZZ75f7rrY56ljsYtQsqivqg2XaxfH1hp3P");
         ParseInstallation.getCurrentInstallation().saveInBackground();
 
         ParseUser.enableAutomaticUser();
