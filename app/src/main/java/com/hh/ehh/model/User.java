@@ -48,7 +48,7 @@ public class User {
                 address == null;
     }
 
-    public String getFullName(){
+    public String getFullName() {
         return this.getName() + " " + this.getSurname();
     }
 

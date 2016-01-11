@@ -121,20 +121,6 @@ public class MedicalCentersListFragment extends Fragment {
         return true;
     }
 
-    private class MedicalCenterHolder extends RecyclerView.ViewHolder {
-        CardView cv;
-        TextView medicalCenterName;
-        ImageView medicalCenterPhoto;
-
-        public MedicalCenterHolder(View itemView) {
-            super(itemView);
-            cv = (CardView) itemView.findViewById(R.id.cv);
-            medicalCenterName = (TextView) itemView.findViewById(R.id.medical_center_name);
-            medicalCenterPhoto = (ImageView) itemView.findViewById(R.id.medical_center_image);
-        }
-    }
-
-
     private void populateUI() {
         RestWebServiceConnection connection = RestWebServiceConnection.getInstance(getActivity());
         connection.getMedicalCentersList(new RestWebServiceConnection.CustomListener<String>() {
@@ -161,5 +147,18 @@ public class MedicalCentersListFragment extends Fragment {
 
             }
         });
+    }
+
+    private class MedicalCenterHolder extends RecyclerView.ViewHolder {
+        CardView cv;
+        TextView medicalCenterName;
+        ImageView medicalCenterPhoto;
+
+        public MedicalCenterHolder(View itemView) {
+            super(itemView);
+            cv = (CardView) itemView.findViewById(R.id.cv);
+            medicalCenterName = (TextView) itemView.findViewById(R.id.medical_center_name);
+            medicalCenterPhoto = (ImageView) itemView.findViewById(R.id.medical_center_image);
+        }
     }
 }

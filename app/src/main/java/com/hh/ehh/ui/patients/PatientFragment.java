@@ -1,8 +1,9 @@
 package com.hh.ehh.ui.patients;
 
 
-import android.content.Context;
+import android.content.Intent;
 import android.content.res.Resources;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -10,7 +11,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.hh.ehh.R;
 import com.hh.ehh.model.Patient;
@@ -22,7 +22,7 @@ public class PatientFragment extends Fragment {
     private Button locatePatientBtn;
     private Button callPatientBtn;
     private Button patientSettingsBtn;
-    private TextView nameHeader,name,birthdateHeader,birthdate,phoneHeader,phone,addressHeader,address;
+    private TextView nameHeader, name, birthdateHeader, birthdate, phoneHeader, phone, addressHeader, address;
 
     public static PatientFragment newInstance(Patient patient) {
         PatientFragment patientFragment = new PatientFragment();
@@ -53,19 +53,18 @@ public class PatientFragment extends Fragment {
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        Patient patient = getArguments().getParcelable(ARG_PATIENT_NUMBER);
+        final Patient patient = getArguments().getParcelable(ARG_PATIENT_NUMBER);
         Resources res = getActivity().getResources();
         nameHeader.setText(res.getString(R.string.name_header));
         birthdateHeader.setText(res.getString(R.string.birthdate_header));
         phoneHeader.setText(res.getString(R.string.phone_header));
         addressHeader.setText(res.getString(R.string.address_header));
-        if(patient != null){
+        if (patient != null) {
             updateUI(patient);
         }
         patientSettingsBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Context context = v.getContext();
                 Fragment fragment = new PatientSettingsFragment();
                 fragmentStackManager.loadFragment(fragment, R.id.responsiblePatientFrame);
 
@@ -74,17 +73,15 @@ public class PatientFragment extends Fragment {
         callPatientBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Context context = v.getContext();
-//                Fragment fragment = new PatientMapFragment();
-//                FragmentManager fragmentManager = getFragmentManager();
-//                fragmentManager.beginTransaction().replace(R.id.content_frame, fragment).addToBackStack("responsible.PatientMainActivity").commit();
-                Toast.makeText(context, "Ring Ring!!", Toast.LENGTH_SHORT).show();
+                if (patient != null && patient.getPhone() != null) {
+                    Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + patient.getPhone()));
+                    startActivity(intent);
+                }
             }
         });
         locatePatientBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Context context = v.getContext();
                 Fragment fragment = new PatientMapFragment();
                 fragmentStackManager.loadFragment(fragment, R.id.responsiblePatientFrame);
 

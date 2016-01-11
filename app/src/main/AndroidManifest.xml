@@ -16,16 +16,20 @@
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
 
-
     <!-- Push Notifications -->
     <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+
+    <!-- CALL -->
+    <uses-permission android:name="android.permission.CALL_PHONE" />
 
     <!--
       IMPORTANT: Change "com.parse.starter.permission.C2D_MESSAGE" in the lines below
       to match your app's package name + ".permission.C2D_MESSAGE".
     -->
-    <permission android:protectionLevel="signature"
-        android:name="com.hh.ehh.permission.C2D_MESSAGE" />
+    <permission
+        android:name="com.hh.ehh.permission.C2D_MESSAGE"
+        android:protectionLevel="signature" />
     <uses-permission android:name="com.hh.ehh.permission.C2D_MESSAGE" />
 
     <!-- Creating Permission to receive Google Maps -->
@@ -42,6 +46,7 @@
         android:required="true" />
 
     <application
+        android:name=".push.StarterApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_ehh"
         android:label="@string/app_name"
@@ -85,14 +90,16 @@
                 <action android:name="com.parse.push.intent.RECEIVE" />
                 <action android:name="com.parse.push.intent.DELETE" />
                 <action android:name="com.parse.push.intent.OPEN" />
+                <!--<action android:name="android.intent.action.BOOT_COMPLETED" />-->
             </intent-filter>
         </receiver>
         <receiver android:name="com.parse.GcmBroadcastReceiver"
             android:permission="com.google.android.c2dm.permission.SEND">
             <intent-filter>
+                <!--<action android:name="com.parse.push.intent.OPEN" />-->
                 <action android:name="com.google.android.c2dm.intent.RECEIVE" />
                 <action android:name="com.google.android.c2dm.intent.REGISTRATION" />
-
+                <!--<action android:name="android.intent.action.BOOT_COMPLETED" />-->
                 <!--
                   IMPORTANT: Change "com.parse.starter" to match your app's package name.
                 -->

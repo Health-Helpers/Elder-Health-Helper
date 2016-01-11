@@ -24,4 +24,5 @@ public class CustomDialogs {
         closeDialog.setNegativeButton(context.getResources().getString(R.string.cancel), cancel);
         return closeDialog;
     }
+
 }

@@ -51,14 +51,15 @@ public class HomeFragment extends Fragment{
                 }
         );
         List<News> newsList = new ArrayList<>();
-        newsList.add(new News("New updates!","We have achieved new updates on this app",null));
-        newsList.add(new News("Version 2.5!","New features on this new release",null));
-        newsList.add(new News("Version 2.4!","New features on this new release",null));
-        newsList.add(new News("Version 2.3!","New features on this new release",null));
-        newsList.add(new News("Version 2.0!","New features on this new release",null));
-        newsList.add(new News("Version 1.2!","New features on this new release",null));
+        newsList.add(new News("New updates!", "We have achieved new updates on this app", null));
+        newsList.add(new News("Version 2.5!", "New features on this new release", null));
+        newsList.add(new News("Version 2.4!", "New features on this new release", null));
+        newsList.add(new News("Version 2.3!", "New features on this new release", null));
+        newsList.add(new News("Version 2.0!", "New features on this new release", null));
+        newsList.add(new News("Version 1.2!", "New features on this new release", null));
         fillAdapter(newsList);
     }
+
     private void fillAdapter(final List<News> newsList) {
         parallaxRecyclerAdapter = new ParallaxRecyclerAdapter<News>(newsList) {
             @Override
