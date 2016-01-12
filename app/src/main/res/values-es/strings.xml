@@ -31,7 +31,6 @@
     <!-- INTERNET -->
     <string name="internet_tittle">Conexión a Internet</string>
     <string name="internet_body">No hay conexión a internet disponible</string>
-    <string name="internet_tittle">Internet Connection</string>
     <string name="logout">Cerrar sessión</string>
 
     <!-- Patients-->

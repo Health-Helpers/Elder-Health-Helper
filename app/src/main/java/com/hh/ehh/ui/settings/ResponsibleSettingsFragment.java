@@ -22,30 +22,6 @@ public class ResponsibleSettingsFragment extends Fragment{
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.settings_fragment, container,false);
 
-        Button btnNewPatient = (Button) view.findViewById(R.id.btnNewPatient);
-        btnNewPatient.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(v.getContext(), "Not implemented yet!", Toast.LENGTH_SHORT).show();
-            }
-        });
-
-
-        Button btnChangeLocale = (Button) view.findViewById(R.id.btnChangeIdiom);
-        btnChangeLocale.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(v.getContext(), "Not implemented yet!", Toast.LENGTH_SHORT).show();
-            }
-        });
-
-        Button btnChange = (Button) view.findViewById(R.id.btnChange);
-        btnChange.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(v.getContext(), "Not implemented yet!", Toast.LENGTH_SHORT).show();
-            }
-        });
 
         android.content.res.Resources res = view.getContext().getResources();
         String configStr = res.getString(R.string.configuration);

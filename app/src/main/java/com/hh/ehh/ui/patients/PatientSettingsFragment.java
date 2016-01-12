@@ -10,11 +10,14 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import com.hh.ehh.R;
+import com.hh.ehh.utils.FragmentStackManager;
 
 /**
  * Fragment that appears in the "content_frame", shows a patient
  */
 public class PatientSettingsFragment extends Fragment {
+
+    private FragmentStackManager fragmentStackManager;
 
     public PatientSettingsFragment() {
         // Empty constructor required for fragment subclasses
@@ -23,10 +26,11 @@ public class PatientSettingsFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-
+        fragmentStackManager = FragmentStackManager.getInstance(getActivity());
         View v = inflater.inflate(R.layout.patient_settings_fragment, container, false);
 
         Button patientAlertsBtn = (Button) v.findViewById(R.id.patientAlertsBtn);
+        //TODO: Obrir un formulari per especificar els metres de radi de la geofence
         patientAlertsBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -38,17 +42,11 @@ public class PatientSettingsFragment extends Fragment {
         secureZoneBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(v.getContext(), "Not implemented yet!", Toast.LENGTH_SHORT).show();
+                Fragment fragment = new PatientGeofenceFragment();
+                fragmentStackManager.loadFragment(fragment, R.id.responsiblePatientFrame);
             }
         });
 
-        Button patientSettingsNameBtn = (Button) v.findViewById(R.id.patientSettingsNameBtn);
-        patientSettingsNameBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(v.getContext(), "Not implemented yet!", Toast.LENGTH_SHORT).show();
-            }
-        });
 
         return v;
     }
