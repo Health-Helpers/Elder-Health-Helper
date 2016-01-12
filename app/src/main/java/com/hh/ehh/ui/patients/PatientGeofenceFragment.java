@@ -56,10 +56,13 @@ public class PatientGeofenceFragment extends Fragment implements GoogleMap.OnMar
 
         // move camera at specific location.
         // current location latitude and longitude can be provided here
-        googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(patientLatitude, patientLongitude), distance>1000?17:13));
+        googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(patientLatitude, patientLongitude), distance > 1000 ? 17 : 13));
 
         // createGeofence location latitude and longitude and shape
         createGeofence(geofenceLatitude, geofenceLongitude, distance, "CIRCLE", "HBGEOFENCE");
+
+        // S'hauria de mostrar un dialeg per confirmar si es vol guardar la geofence.
+        // A l'aplicació del pacient, s'hauria de ficar la detecció de la geofence i enviar notificacions en entrades/sortides d'aquesta
 
         return v;
     }

@@ -30,7 +30,8 @@ public class PatientSettingsFragment extends Fragment {
         View v = inflater.inflate(R.layout.patient_settings_fragment, container, false);
 
         Button patientAlertsBtn = (Button) v.findViewById(R.id.patientAlertsBtn);
-        //TODO: Obrir un formulari per especificar els metres de radi de la geofence
+        //TODO: Obrir un formulari per especificar els metres de radi de la geofence.
+
         patientAlertsBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
