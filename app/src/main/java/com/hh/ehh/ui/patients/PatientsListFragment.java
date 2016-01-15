@@ -1,13 +1,10 @@
 package com.hh.ehh.ui.patients;
 
-import android.app.Dialog;
 import android.app.ProgressDialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.TextInputLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -20,18 +17,14 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.hh.ehh.R;
 import com.hh.ehh.model.Patient;
 import com.hh.ehh.model.Profile;
-import com.hh.ehh.model.User;
 import com.hh.ehh.networking.SoapWebServiceConnection;
 import com.hh.ehh.utils.FragmentStackManager;
-import com.hh.ehh.utils.Validators;
 import com.hh.ehh.utils.xml.XMLHandler;
 import com.poliveira.parallaxrecyclerview.ParallaxRecyclerAdapter;
 
@@ -93,7 +86,8 @@ public class PatientsListFragment extends Fragment {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                newPatientDialog(profile).show();
+                PatientRegister patientRegister = PatientRegister.newInstance(profile);
+                fragmentStackManager.loadFragment(patientRegister, R.id.responsiblePatientFrame);
             }
         });
     }
@@ -154,64 +148,6 @@ public class PatientsListFragment extends Fragment {
         return true;
     }
 
-    private Dialog newPatientDialog(final Profile profile) {
-        Button addPatient;
-        final Dialog patientDialog = new Dialog(getActivity());
-        patientDialog.setTitle(getActivity().getResources().getString(R.string.add_patient));
-        patientDialog.setContentView(R.layout.add_new_patient);
-        addPatient = (Button) patientDialog.findViewById(R.id.btn_add);
-        addPatient.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                checkFields(patientDialog, getActivity(), profile);
-            }
-        });
-        return patientDialog;
-    }
-
-    private void checkFields(Dialog view, Context context, Profile profile) {
-        EditText dni, name, surnames, phone, address;
-        TextInputLayout layout_dni, layout_name, layout_surnames, layout_phone, layout_address;
-        dni = (EditText) view.findViewById(R.id.input_dni);
-        name = (EditText) view.findViewById(R.id.input_name);
-        surnames = (EditText) view.findViewById(R.id.input_surname);
-        phone = (EditText) view.findViewById(R.id.input_phone);
-        address = (EditText) view.findViewById(R.id.input_address);
-        layout_dni = (TextInputLayout) view.findViewById(R.id.input_layout_dni);
-        layout_name = (TextInputLayout) view.findViewById(R.id.input_layout_name);
-        layout_surnames = (TextInputLayout) view.findViewById(R.id.input_layout_surname);
-        layout_phone = (TextInputLayout) view.findViewById(R.id.input_layout_phone);
-        layout_address = (TextInputLayout) view.findViewById(R.id.input_layout_address);
-        if (!Validators.dniValidator(dni.getText().toString())) {
-            layout_dni.setError(context.getResources().getString(R.string.wrong_dni));
-        } else if (name.getText().toString().length() == 0) {
-            layout_name.setError(context.getResources().getString(R.string.wrong_name));
-        } else if (surnames.getText().toString().length() == 0) {
-            layout_surnames.setError(context.getResources().getString(R.string.wrong_surnames));
-        } else if (phone.getText().toString().length() < 9) {
-            layout_phone.setError(context.getResources().getString(R.string.wrong_phone));
-        } else if (address.getText().toString().length() == 0) {
-            layout_address.setError(context.getResources().getString(R.string.wrong_address));
-        } else {
-            layout_dni.setErrorEnabled(false);
-            layout_name.setErrorEnabled(false);
-            layout_surnames.setErrorEnabled(false);
-            layout_phone.setErrorEnabled(false);
-            layout_address.setErrorEnabled(false);
-            User user = new User.UserBuilder()
-                    .setId(dni.getText().toString())
-                    .setName(name.getText().toString())
-                    .setSurname(surnames.getText().toString())
-                    .setPhone(phone.getText().toString())
-                    .setAddress(address.getText().toString())
-                    .build();
-            SoapWebServiceConnection soapWebServiceConnection = SoapWebServiceConnection.getInstance(context);
-            if (SoapWebServiceConnection.checkInternetConnection(getActivity()))
-                soapWebServiceConnection.postPattient(profile, user);
-        }
-    }
-
-
     private class PatientHolder extends RecyclerView.ViewHolder {
         CardView cv;
         TextView personName;
@@ -226,7 +162,6 @@ public class PatientsListFragment extends Fragment {
             personPhoto = (ImageView) itemView.findViewById(R.id.person_photo);
         }
     }
-
 
     private class GetAllPatients extends AsyncTask<String, Void, List<Patient>> {
         private ProgressDialog dialog;
@@ -277,7 +212,8 @@ public class PatientsListFragment extends Fragment {
 //            patients.addAll(patientList);
             if (patientList != null)
                 fillAdapter(patientList);
-            dialog.cancel();
+            if (dialog != null)
+                dialog.cancel();
             refreshLayout.setRefreshing(false);
         }
     }

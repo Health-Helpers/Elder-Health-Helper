@@ -5,9 +5,8 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.support.annotation.NonNull;
 
+import com.hh.ehh.model.Patient;
 import com.hh.ehh.model.Profile;
-import com.hh.ehh.model.User;
-import com.parse.ParseInstallation;
 
 import org.ksoap2.SoapEnvelope;
 import org.ksoap2.serialization.SoapObject;
@@ -33,6 +32,7 @@ public class SoapWebServiceConnection {
     private static String UPDATE_PATIENT = "updatePatient";
     private static String UPDATE_RESPONSIBLE = "updateResponsible";
     private static String GET_RESPONSIBLE_PATIENTS = "getResponsiblePatients";
+    private static String POST_NEW_PATIENT = "createPatient";
     private static String NAMESPACE = "http://ws.ehh.cat/";
     private static String SOAP_WS_CONTROLLER = "/SoapWSController";
     private static String SOAP_ACTION = NAMESPACE + SOAP_WS_CONTROLLER;
@@ -61,16 +61,15 @@ public class SoapWebServiceConnection {
     /***********************************************************
      * GET
      ***********************************************************/
-    public String getPatient(@NonNull String id) {
-        String action = SOAP_ACTION + "/" + READ_PATIENT;
-        SoapObject request = new SoapObject(NAMESPACE, READ_PATIENT);
-        SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);
-        envelope.dotNet = true;
-        request.addProperty("patientId", Integer.valueOf(id));
-        envelope.setOutputSoapObject(request);
-        return GET(action, envelope);
-    }
-
+//    public String getPatient(@NonNull String id) {
+//        String action = SOAP_ACTION + "/" + READ_PATIENT;
+//        SoapObject request = new SoapObject(NAMESPACE, READ_PATIENT);
+//        SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);
+//        envelope.dotNet = true;
+//        request.addProperty("patientId", Integer.valueOf(id));
+//        envelope.setOutputSoapObject(request);
+//        return GET(action, envelope);
+//    }
     public String getResponsible(@NonNull String id) {
         String action = SOAP_ACTION + "/" + READ_RESPONSIBLE;
         SoapObject request = new SoapObject(NAMESPACE, READ_RESPONSIBLE);
@@ -82,6 +81,16 @@ public class SoapWebServiceConnection {
     }
 
     public String getResponsiblePatients(@NonNull String id) {
+        String action = SOAP_ACTION + "/" + GET_RESPONSIBLE_PATIENTS;
+        SoapObject request = new SoapObject(NAMESPACE, GET_RESPONSIBLE_PATIENTS);
+        SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);
+        envelope.dotNet = true;
+        request.addProperty("responsibleId", Integer.valueOf(id));
+        envelope.setOutputSoapObject(request);
+        return GET(action, envelope);
+    }
+
+    public String getPatientLocation(@NonNull String id) {
         String action = SOAP_ACTION + "/" + GET_RESPONSIBLE_PATIENTS;
         SoapObject request = new SoapObject(NAMESPACE, GET_RESPONSIBLE_PATIENTS);
         SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);
@@ -105,8 +114,21 @@ public class SoapWebServiceConnection {
     /***********************************************************
      * POST
      ***********************************************************/
-    public void postPattient(Profile profile, User patient) {
-        String parseID = ParseInstallation.getCurrentInstallation().getInstallationId();
-
+    public void postPatient(Profile profile, Patient patient) {
+        String action = SOAP_ACTION + "/" + POST_NEW_PATIENT;
+        SoapObject request = new SoapObject(NAMESPACE, POST_NEW_PATIENT);
+        SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);
+        envelope.dotNet = true;
+        request.addProperty("name", patient.getName());
+        request.addProperty("surname", patient.getSurname());
+        request.addProperty("idDoc", patient.getIdDoc());
+        request.addProperty("phone  ", patient.getPhone());
+        request.addProperty("birthdate", patient.getBirthDate());
+        request.addProperty("address", patient.getAddress());
+        request.addProperty("disease", patient.getDiseases());
+        request.addProperty("dependencyGrade", patient.getDependencyGrade());
+        request.addProperty("responsibleId", Integer.valueOf(profile.getId()));
+        envelope.setOutputSoapObject(request);
+        GET(action, envelope);
     }
 }

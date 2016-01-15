@@ -1,7 +1,6 @@
 package com.hh.ehh.push;
 
 import android.app.Application;
-import android.widget.Toast;
 
 import com.parse.Parse;
 import com.parse.ParseACL;
@@ -21,7 +20,7 @@ public class StarterApplication extends Application {
         // Add your initialization code here
         Parse.initialize(this, "l3gHQ5XzYri2jGFACJkZKiupEHe3xDF2MgoRbrz4", "rppSTdZZ75f7rrY56ljsYtQsqivqg2XaxfH1hp3P");
         ParseInstallation.getCurrentInstallation().saveInBackground();
-        Toast.makeText(this, ParseInstallation.getCurrentInstallation().getInstallationId(), Toast.LENGTH_LONG).show();
+//        Toast.makeText(this, ParseInstallation.getCurrentInstallation().getInstallationId(), Toast.LENGTH_LONG).show();
         ParseUser.enableAutomaticUser();
         ParseACL defaultACL = new ParseACL();
         // Optionally enable public read access.

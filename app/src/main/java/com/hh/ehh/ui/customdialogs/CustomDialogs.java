@@ -25,4 +25,16 @@ public class CustomDialogs {
         return closeDialog;
     }
 
+    public static Builder wrongDateDialog(final Context context) {
+        return new Builder(context)
+                .setTitle(context.getResources().getString(R.string.wrong_date))
+                .setMessage(context.getResources().getString(R.string.wrong_date_text))
+                .setNeutralButton(context.getResources().getString(R.string.accept),
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog,
+                                                int which) {
+                                dialog.dismiss();
+                            }
+                        });
+    }
 }

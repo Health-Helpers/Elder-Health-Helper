@@ -84,7 +84,7 @@ public class MedicalCenterFragment extends Fragment {
                 CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(new LatLng(
                         Double.parseDouble(medicalCenter.getLatitude()),
                         Double.parseDouble(medicalCenter.getLongitude())
-                ), 13);
+                ), 20);
                 map.animateCamera(cameraUpdate);
                 name.setText(medicalCenter.getName());
                 phone.setText(medicalCenter.getPhone());

@@ -36,6 +36,9 @@
     <string name="phone_header">Phone</string>
     <string name="address_header">Address</string>
     <string name="surname_header">Surnames</string>
+    <string name="disese_header">Disease</string>
+    <string name="dependency_header">Dependency grade</string>
+
     <string name="request_patient">Request new patient</string>
     <string name="add_patient_header">This is a form to request for the addition of a new patient for your supervision. This may last from 24 to 48 hours. Thanks for your patience.</string>
     <string name="add_patient">New patient form</string>
@@ -62,5 +65,13 @@
 
     <!-- News-->
     <string name="news">News</string>
+    <string name="wrong_disease">El campo enfermedad no puede estar vacío.</string>
+    <string name="birthday_header">Fecha de nacimiento</string>
+    <string name="wrong_date">Wrong date</string>
+    <string name="wrong_date_text">Future date is not allowed here.</string>
+    <string name="wrong_birthday">El campo fecha de nacimiento no puede estar vacío.</string>
+    <string name="low">Low</string>
+    <string name="mid">Medium</string>
+    <string name="high">High</string>
 
 </resources>

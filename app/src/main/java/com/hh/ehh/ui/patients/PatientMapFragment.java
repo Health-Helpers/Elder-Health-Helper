@@ -19,29 +19,20 @@ import com.hh.ehh.R;
 
 public  class PatientMapFragment extends Fragment {
 
-
-    /**
-     * Note that this may be null if the Google Play services APK is not
-     * available.
-     */
-
     MapView mMapView;
     private GoogleMap googleMap;
 
 
     public PatientMapFragment() {
-        // Empty constructor required for fragment subclasses
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // inflat and return the layout
         View v = inflater.inflate(R.layout.patient_map, container,
                 false);
         mMapView = (MapView) v.findViewById(R.id.location_map);
         mMapView.onCreate(savedInstanceState);
-
         mMapView.onResume();// needed to get the map to display immediately
 
         try {
@@ -66,10 +57,9 @@ public  class PatientMapFragment extends Fragment {
         // adding marker
         googleMap.addMarker(marker);
         CameraPosition cameraPosition = new CameraPosition.Builder()
-                .target(new LatLng(latitude, longitude)).zoom(12).build();
+                .target(new LatLng(latitude, longitude)).zoom(20).build();
         googleMap.animateCamera(CameraUpdateFactory
                 .newCameraPosition(cameraPosition));
-
         // Perform any camera updates here
         return v;
     }

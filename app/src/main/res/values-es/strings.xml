@@ -31,7 +31,7 @@
     <!-- INTERNET -->
     <string name="internet_tittle">Conexión a Internet</string>
     <string name="internet_body">No hay conexión a internet disponible</string>
-    <string name="logout">Cerrar sessión</string>
+    <string name="logout">Salir</string>
 
     <!-- Patients-->
     <string name="request_patient">Enviar petición</string>
@@ -40,6 +40,8 @@
     <string name="phone_header">Teléfono</string>
     <string name="address_header">Dirección</string>
     <string name="surname_header">Apellidos</string>
+    <string name="disese_header">Emfermedad</string>
+    <string name="dependency_header">Grado de dependéncia</string>
 
     <string name="add_patient_header">Este es un formulario para añadir un nuevo paciente bajo su supervisión. Puede tardar entre 24 y 48 horas. Gracias por su paciencia.</string>
     <string name="add_patient">Nuevo paciente</string>
@@ -65,5 +67,13 @@
 
     <!-- News-->
     <string name="news">Notícias</string>
+    <string name="wrong_disease">El campo enfermedad no puede estar vacío.</string>
+    <string name="birthday_header">Fecha de nacimiento</string>
+    <string name="wrong_date">Wrong date</string>
+    <string name="wrong_date_text">Future date is not allowed here.</string>
+    <string name="wrong_birthday">El campo fecha de nacimiento no puede estar vacío.</string>
+    <string name="low">Low</string>
+    <string name="mid">Medium</string>
+    <string name="high">High</string>
 
 </resources>
