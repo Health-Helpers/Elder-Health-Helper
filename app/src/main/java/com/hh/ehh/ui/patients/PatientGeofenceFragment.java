@@ -17,11 +17,16 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.hh.ehh.R;
+import com.hh.ehh.model.Patient;
+import com.hh.ehh.utils.FragmentStackManager;
 
 /**
  * Created by Ivan on 12/01/2016.
  */
 public class PatientGeofenceFragment extends Fragment implements GoogleMap.OnMarkerDragListener {
+
+    private FragmentStackManager fragmentStackManager;
+    public static final String ARG_PATIENT_NUMBER = "patient_number";
 
     public GoogleMap googleMap;
     private int distance = 1000;
@@ -30,11 +35,24 @@ public class PatientGeofenceFragment extends Fragment implements GoogleMap.OnMar
     double patientLongitude = 0.6235039;
     double geofenceLatitude = 41.6081194;
     double geofenceLongitude = 0.6235039;
+    public int radius;
 
+
+    public static PatientGeofenceFragment newInstance(Patient patient) {
+        PatientGeofenceFragment patientGeofenceFragment = new PatientGeofenceFragment();
+        Bundle bundle = new Bundle();
+        bundle.putParcelable(ARG_PATIENT_NUMBER, patient);
+        patientGeofenceFragment.setArguments(bundle);
+        return patientGeofenceFragment;
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+
+        fragmentStackManager = FragmentStackManager.getInstance(getActivity());
+
          View v = inflater.inflate(R.layout.patient_geofence_map, container, false);
+
 
         // create an object of GoogleMap and get the reference of map from the
         // xml layout file
@@ -70,6 +88,7 @@ public class PatientGeofenceFragment extends Fragment implements GoogleMap.OnMar
     private void createGeofence(double latitude, double longitude, int radius, String geofenceType, String title){
         Marker stopMarker = googleMap.addMarker(new MarkerOptions().draggable(true).position(new LatLng(latitude, longitude)).title(title).infoWindowAnchor(10, 10).draggable(true).icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_ehh)));
         googleMap.addCircle(new CircleOptions().center(new LatLng(latitude, longitude)).radius(radius).strokeColor(Color.parseColor("#ffff00")).fillColor(Color.TRANSPARENT));
+        this.radius = radius;
     }
 
     @Override
@@ -77,6 +96,15 @@ public class PatientGeofenceFragment extends Fragment implements GoogleMap.OnMar
 
     @Override
     public void onMarkerDragEnd(Marker marker){
+
+        final Patient patient = getArguments().getParcelable(ARG_PATIENT_NUMBER);
+        PatientGeofenceDialogFragment fragment = PatientGeofenceDialogFragment.newInstance(patient);
+        fragment.setLatidude(marker.getPosition().latitude);
+        fragment.setLongitude(marker.getPosition().longitude);
+       // fragment.setRadius(this.radius);
+
+        fragment.show(getFragmentManager(),"radius");
+
         LatLng dragPosition = marker.getPosition();
         double dragLat = dragPosition.latitude;
         double dragLong = dragPosition.longitude;

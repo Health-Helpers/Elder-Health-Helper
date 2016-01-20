@@ -65,7 +65,7 @@ public class PatientFragment extends Fragment {
         patientSettingsBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Fragment fragment = new PatientSettingsFragment();
+                Fragment fragment = PatientSettingsFragment.newInstance(patient);
                 fragmentStackManager.loadFragment(fragment, R.id.responsiblePatientFrame);
 
             }

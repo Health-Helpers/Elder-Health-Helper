@@ -10,6 +10,7 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import com.hh.ehh.R;
+import com.hh.ehh.model.Patient;
 import com.hh.ehh.utils.FragmentStackManager;
 
 /**
@@ -18,20 +19,25 @@ import com.hh.ehh.utils.FragmentStackManager;
 public class PatientSettingsFragment extends Fragment {
 
     private FragmentStackManager fragmentStackManager;
+    public static final String ARG_PATIENT_NUMBER = "patient_number";
+    private Button patientAlertsBtn,secureZoneBtn;
 
-    public PatientSettingsFragment() {
-        // Empty constructor required for fragment subclasses
+
+    public static PatientSettingsFragment newInstance(Patient patient) {
+        PatientSettingsFragment patientSettingsFragment = new PatientSettingsFragment();
+        Bundle bundle = new Bundle();
+        bundle.putParcelable(ARG_PATIENT_NUMBER, patient);
+        patientSettingsFragment.setArguments(bundle);
+        return patientSettingsFragment;
     }
 
+
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        final Patient patient = getArguments().getParcelable(ARG_PATIENT_NUMBER);
 
-        fragmentStackManager = FragmentStackManager.getInstance(getActivity());
-        View v = inflater.inflate(R.layout.patient_settings_fragment, container, false);
-
-        Button patientAlertsBtn = (Button) v.findViewById(R.id.patientAlertsBtn);
         //TODO: Obrir un formulari per especificar els metres de radi de la geofence.
-
         patientAlertsBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -39,15 +45,26 @@ public class PatientSettingsFragment extends Fragment {
             }
         });
 
-        Button secureZoneBtn = (Button) v.findViewById(R.id.secureZoneBtn);
         secureZoneBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Fragment fragment = new PatientGeofenceFragment();
+                Fragment fragment = PatientGeofenceFragment.newInstance(patient);
                 fragmentStackManager.loadFragment(fragment, R.id.responsiblePatientFrame);
             }
         });
 
+    }
+
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+
+        View v = inflater.inflate(R.layout.patient_settings_fragment, container, false);
+
+        fragmentStackManager = FragmentStackManager.getInstance(getActivity());
+
+        patientAlertsBtn = (Button) v.findViewById(R.id.patientAlertsBtn);
+        secureZoneBtn = (Button) v.findViewById(R.id.secureZoneBtn);
 
         return v;
     }
