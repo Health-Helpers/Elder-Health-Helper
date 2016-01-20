@@ -156,7 +156,7 @@ public class SoapWebServiceConnection {
         GET(action, envelope);
     }
 
-    public void getPatientGeofence(Patient patient) {
+    public String getPatientGeofence(Patient patient) {
         String action = SOAP_ACTION + "/" + GET_PATIENT_GEOFENCE;
         SoapObject request = new SoapObject(NAMESPACE, GET_PATIENT_GEOFENCE);
         SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);
@@ -164,6 +164,6 @@ public class SoapWebServiceConnection {
         request.addProperty("patientId", patient.getId());
 
         envelope.setOutputSoapObject(request);
-        GET(action, envelope);
+        return GET(action, envelope);
     }
 }

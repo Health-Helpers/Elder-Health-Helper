@@ -27,7 +27,7 @@ public class PatientGeofenceDialogFragment extends DialogFragment {
 
 
     public static final String ARG_PATIENT_NUMBER = "patient_number";
-    public double latidude;
+    public double latitude;
 
     public double longitude;
     private EditText radiusInput;
@@ -56,7 +56,7 @@ public class PatientGeofenceDialogFragment extends DialogFragment {
         radiusInput = (EditText) rootView.findViewById(R.id.geofence_radius);
 
         builder.setView(rootView)
-                .setPositiveButton("Guardar", new DialogPositiveClickListener(latidude, longitude, patient))
+                .setPositiveButton("Guardar", new DialogPositiveClickListener(latitude, longitude, patient))
                 .setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         PatientGeofenceDialogFragment.this.getDialog().cancel();
@@ -65,12 +65,12 @@ public class PatientGeofenceDialogFragment extends DialogFragment {
         return builder.create();
     }
 
-    public double getLatidude() {
-        return latidude;
+    public double getLatitude() {
+        return latitude;
     }
 
     public void setLatidude(double latidude) {
-        this.latidude = latidude;
+        this.latitude = latidude;
     }
 
     public double getLongitude() {
@@ -90,7 +90,7 @@ public class PatientGeofenceDialogFragment extends DialogFragment {
         double latitude;
         Patient patient;
 
-        public DialogPositiveClickListener(double longitude, double latitude,Patient patient) {
+        public DialogPositiveClickListener(double latitude, double longitude,Patient patient) {
             this.latitude = latitude;
             this.longitude = longitude;
             this.patient = patient;
@@ -117,9 +117,8 @@ public class PatientGeofenceDialogFragment extends DialogFragment {
         if (SoapWebServiceConnection.checkInternetConnection(getActivity())) {
             SoapWebServiceConnection soapWebServiceConnection = SoapWebServiceConnection.getInstance(getActivity());
 
-            Geofence geofenceObject = new Geofence(this.patient.getId(),"",geofence.getRadius(),geofence.getLatitude(),geofence.getLongitude());
-            SaveGeofence postGeofence = new SaveGeofence(soapWebServiceConnection,geofenceObject,this.patient);
-            postGeofence.execute(geofenceObject);
+            SaveGeofence postGeofence = new SaveGeofence(soapWebServiceConnection,geofence,this.patient);
+            postGeofence.execute(geofence);
          }
     }
 

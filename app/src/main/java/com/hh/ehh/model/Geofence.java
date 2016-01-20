@@ -13,6 +13,9 @@ public class Geofence implements Parcelable {
     private String latitude;
     private String longitude;
 
+    public Geofence() {
+    }
+
     public Geofence(String patientId,String geofenceId, String radius, String latitude, String longitude) {
         this.geofenceId = geofenceId;
         this.patientId = patientId;
