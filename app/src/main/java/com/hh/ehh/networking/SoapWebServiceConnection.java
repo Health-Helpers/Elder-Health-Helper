@@ -5,6 +5,7 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.support.annotation.NonNull;
 
+import com.hh.ehh.model.Geofence;
 import com.hh.ehh.model.Patient;
 import com.hh.ehh.model.Profile;
 
@@ -33,6 +34,12 @@ public class SoapWebServiceConnection {
     private static String UPDATE_RESPONSIBLE = "updateResponsible";
     private static String GET_RESPONSIBLE_PATIENTS = "getResponsiblePatients";
     private static String POST_NEW_PATIENT = "createPatient";
+    private static String ADD_GEOFENCE = "addPatientGeofence";
+    private static String GET_PATIENT_GEOFENCE = "getPatientGeofences";
+
+
+
+
     private static String NAMESPACE = "http://ws.ehh.cat/";
     private static String SOAP_WS_CONTROLLER = "/SoapWSController";
     private static String SOAP_ACTION = NAMESPACE + SOAP_WS_CONTROLLER;
@@ -128,6 +135,34 @@ public class SoapWebServiceConnection {
         request.addProperty("disease", patient.getDiseases());
         request.addProperty("dependencyGrade", patient.getDependencyGrade());
         request.addProperty("responsibleId", Integer.valueOf(profile.getId()));
+        envelope.setOutputSoapObject(request);
+        GET(action, envelope);
+    }
+
+    /***********************************************************
+     * GEOFENCES
+     ***********************************************************/
+    public void addPatientGeofence(Geofence geofence, Patient patient) {
+        String action = SOAP_ACTION + "/" + ADD_GEOFENCE;
+        SoapObject request = new SoapObject(NAMESPACE, ADD_GEOFENCE);
+        SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);
+        envelope.dotNet = true;
+        request.addProperty("patientId", patient.getId());
+        request.addProperty("radius", geofence.getRadius());
+        request.addProperty("latitude", geofence.getLatitude());
+        request.addProperty("longitude", geofence.getLongitude());
+
+        envelope.setOutputSoapObject(request);
+        GET(action, envelope);
+    }
+
+    public void getPatientGeofence(Patient patient) {
+        String action = SOAP_ACTION + "/" + GET_PATIENT_GEOFENCE;
+        SoapObject request = new SoapObject(NAMESPACE, GET_PATIENT_GEOFENCE);
+        SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);
+        envelope.dotNet = true;
+        request.addProperty("patientId", patient.getId());
+
         envelope.setOutputSoapObject(request);
         GET(action, envelope);
     }

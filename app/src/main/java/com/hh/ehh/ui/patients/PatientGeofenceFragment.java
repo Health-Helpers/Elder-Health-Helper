@@ -79,8 +79,7 @@ public class PatientGeofenceFragment extends Fragment implements GoogleMap.OnMar
         // createGeofence location latitude and longitude and shape
         createGeofence(geofenceLatitude, geofenceLongitude, distance, "CIRCLE", "HBGEOFENCE");
 
-        // TODO: S'hauria de mostrar un dialeg per confirmar si es vol guardar la geofence.
-        // A l'aplicació del pacient, s'hauria de ficar la detecció de la geofence i enviar notificacions en entrades/sortides d'aquesta
+        // TODO:  A l'aplicació del pacient, s'hauria de ficar la detecció de la geofence i enviar notificacions en entrades/sortides d'aquesta
 
         return v;
     }
