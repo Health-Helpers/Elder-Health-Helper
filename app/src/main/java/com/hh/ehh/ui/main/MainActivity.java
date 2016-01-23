@@ -25,13 +25,8 @@ import com.hh.ehh.ui.customdialogs.CustomDialogs;
 import com.hh.ehh.ui.medicalcenters.MedicalCentersListFragment;
 import com.hh.ehh.ui.patients.PatientsListFragment;
 import com.hh.ehh.ui.profile.ProfileFragment;
-import com.hh.ehh.ui.settings.ResponsibleSettingsFragment;
+import com.hh.ehh.ui.settings.SettingsFragment;
 import com.hh.ehh.utils.FragmentStackManager;
-
-import com.parse.Parse;
-import com.parse.ParseACL;
-import com.parse.ParseInstallation;
-import com.parse.ParseUser;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -56,7 +51,6 @@ public class MainActivity extends AppCompatActivity {
         fragmentStackManager.loadFragment(responsibleHomeFragment, R.id.responsiblePatientFrame);
         toolbar.setLogo(R.mipmap.ic_ehh);
         setDatabase();
-        profile = getProfileFromDatabase(database);
     }
 
     private void setDatabase() {
@@ -100,10 +94,11 @@ public class MainActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         View v = findViewById(R.id.header_view);
         Context context = v.getContext();
+        profile = getProfileFromDatabase(database);
         if (profile != null && v != null) {
             TextView name = (TextView) v.findViewById(R.id.username);
             TextView email = (TextView) v.findViewById(R.id.email);
-            name.setText(profile.getName());
+            name.setText(profile.getFullName());
             email.setText(profile.getEmail());
         }
 
@@ -118,10 +113,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        if (!drawerLayout.isDrawerOpen(GravityCompat.START)) {
-            return true;
-        }
-        return super.onCreateOptionsMenu(menu);
+        return !drawerLayout.isDrawerOpen(GravityCompat.START) || super.onCreateOptionsMenu(menu);
     }
 
     @Override
@@ -154,9 +146,9 @@ public class MainActivity extends AppCompatActivity {
                 closeDrawer();
                 break;
             case R.id.nav_config:
-                fragment = new ResponsibleSettingsFragment();
+                SettingsFragment settingsFragment = new SettingsFragment();
                 fragmentStackManager.resetBackStack(responsibleHomeFragment);
-                fragmentStackManager.loadFragment(fragment, R.id.responsiblePatientFrame);
+                fragmentStackManager.loadFragment(settingsFragment, R.id.responsiblePatientFrame);
                 closeDrawer();
                 break;
         }
@@ -166,8 +158,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         if (closeDrawer()) {
-        } else if (fragmentStackManager.popBackStatFragment()) {
-        } else {
+        } else if (!fragmentStackManager.popBackStatFragment()) {
             CustomDialogs.closeDialog(MainActivity.this, new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
@@ -195,14 +186,7 @@ public class MainActivity extends AppCompatActivity {
         Profile dbProfile = null;
         if (database != null) {
             dbProfile = ProfileDatabaseManager.getProfile(database);
-            dbProfile = new Profile("1", "Juan", "Pérez", "juanperez@gmail.com", "Lleida", null, "973234323");
         }
-        /*Must be removed*/
-        else {
-            dbProfile = new Profile("1", "Juan", "Pérez", "juanperez@gmail.com", "Lleida", null, "973234323");
-            profile = dbProfile;
-        }
-
         return dbProfile;
     }
 

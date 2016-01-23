@@ -6,7 +6,6 @@ import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,7 +23,6 @@ import com.hh.ehh.R;
 import com.hh.ehh.model.Geofence;
 import com.hh.ehh.model.Patient;
 import com.hh.ehh.networking.SoapWebServiceConnection;
-import com.hh.ehh.utils.FragmentStackManager;
 import com.hh.ehh.utils.xml.XMLHandler;
 
 import org.xmlpull.v1.XmlPullParserException;
@@ -38,19 +36,15 @@ import java.util.concurrent.ExecutionException;
  */
 public class PatientGeofenceFragment extends Fragment implements GoogleMap.OnMarkerDragListener {
 
-    private FragmentStackManager fragmentStackManager;
     public static final String ARG_PATIENT_NUMBER = "patient_number";
-    private ReadGeofence readGeofences;
-
     public GoogleMap googleMap;
-    private int distance = 1000;
+    public int radius;
     MapView mMapView;
     double patientLatitude = 41.6081194;
     double patientLongitude = 0.6235039;
-
-    public int radius;
     Patient patient;
-
+    private ReadGeofence readGeofences;
+    private int distance = 1000;
 
     public static PatientGeofenceFragment newInstance(Patient patient) {
         PatientGeofenceFragment patientGeofenceFragment = new PatientGeofenceFragment();
@@ -64,7 +58,6 @@ public class PatientGeofenceFragment extends Fragment implements GoogleMap.OnMar
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-        fragmentStackManager = FragmentStackManager.getInstance(getActivity());
 
         View v = inflater.inflate(R.layout.patient_geofence_map, container, false);
 
@@ -72,13 +65,10 @@ public class PatientGeofenceFragment extends Fragment implements GoogleMap.OnMar
         this.patient = patient;
 
         readPatientGeofences(patient);
-
-        // create an object of GoogleMap and get the reference of map from the
-        // xml layout file
         mMapView = (MapView) v.findViewById(R.id.geofence_map);
         mMapView.onCreate(savedInstanceState);
 
-        mMapView.onResume();// needed to get the map to display immediately
+        mMapView.onResume();
 
         try {
             MapsInitializer.initialize(getActivity().getApplicationContext());
@@ -87,12 +77,7 @@ public class PatientGeofenceFragment extends Fragment implements GoogleMap.OnMar
         }
 
         googleMap = mMapView.getMap();
-        // set OnMarkerDrag Listener
         googleMap.setOnMarkerDragListener(PatientGeofenceFragment.this);
-
-
-        // move camera at specific location.
-        // current location latitude and longitude can be provided here
         googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(patientLatitude, patientLongitude), distance > 1000 ? 17 : 13));
 
         //FIXME: Si el paciente tiene más de una zona suscrita, mostrar el marcador
@@ -113,9 +98,7 @@ public class PatientGeofenceFragment extends Fragment implements GoogleMap.OnMar
         readGeofences = new ReadGeofence();
         try {
             readGeofences.execute(patient).get();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        } catch (ExecutionException e) {
+        } catch (InterruptedException | ExecutionException e) {
             e.printStackTrace();
         }
     }
@@ -157,10 +140,10 @@ public class PatientGeofenceFragment extends Fragment implements GoogleMap.OnMar
 
     private class ReadGeofence extends AsyncTask<Patient, Void, List<Geofence>> {
 
+        Patient patient;
         private SoapWebServiceConnection soapWebServiceConnection;
         private Geofence geofence;
         private ProgressDialog dialog;
-        Patient patient;
 
 
         public ReadGeofence(){}

@@ -18,8 +18,8 @@ import com.hh.ehh.utils.FragmentStackManager;
  */
 public class PatientSettingsFragment extends Fragment {
 
-    private FragmentStackManager fragmentStackManager;
     public static final String ARG_PATIENT_NUMBER = "patient_number";
+    private FragmentStackManager fragmentStackManager;
     private Button patientAlertsBtn,secureZoneBtn;
 
 
@@ -37,7 +37,6 @@ public class PatientSettingsFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
         final Patient patient = getArguments().getParcelable(ARG_PATIENT_NUMBER);
 
-        //TODO: Obrir un formulari per especificar els metres de radi de la geofence.
         patientAlertsBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

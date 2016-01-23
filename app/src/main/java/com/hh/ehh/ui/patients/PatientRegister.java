@@ -133,6 +133,8 @@ public class PatientRegister extends Fragment {
                         SoapWebServiceConnection soapWebServiceConnection = SoapWebServiceConnection.getInstance(getActivity());
                         postPatient = new PostPatient(soapWebServiceConnection, profile);
                         postPatient.execute(patient);
+                    } else {
+                        CustomDialogs.noInternetConnection(getActivity()).show();
                     }
                 }
             }

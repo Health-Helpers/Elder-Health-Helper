@@ -59,6 +59,7 @@ public class DataBaseSQLiteHelper extends SQLiteOpenHelper{
         StringBuilder profileTables = new StringBuilder();
         profileTables
                 .append(ProfileTable.Cols.ID).append(" INTEGER NOT NULL ON CONFLICT IGNORE PRIMARY KEY AUTOINCREMENT, ")
+                .append(ProfileTable.Cols.IDDOC).append(" TEXT NOT NULL ON CONFLICT IGNORE, ")
                 .append(ProfileTable.Cols.NAME).append(" TEXT NOT NULL ON CONFLICT IGNORE, ")
                 .append(ProfileTable.Cols.SURNAME).append(" TEXT, ")
                 .append(ProfileTable.Cols.EMAIL).append(" TEXT, ")

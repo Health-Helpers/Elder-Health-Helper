@@ -8,6 +8,7 @@ public class ProfileTable {
 
     public static class Cols {
         public static final String ID = "_id";
+        public static final String IDDOC = "_idDoc";
         public static final String NAME = "_name";
         public static final String SURNAME = "_surname";
         public static final String EMAIL = "_email";
@@ -17,6 +18,7 @@ public class ProfileTable {
 
         public static String[] getAllCols() {
             return new String[]{ID,
+                    IDDOC,
                     NAME,
                     SURNAME,
                     EMAIL,

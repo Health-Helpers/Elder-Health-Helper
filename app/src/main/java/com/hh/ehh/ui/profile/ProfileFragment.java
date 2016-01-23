@@ -1,7 +1,12 @@
 package com.hh.ehh.ui.profile;
 
+import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -12,7 +17,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.hh.ehh.R;
+import com.hh.ehh.database.DataBaseSQLiteHelper;
 import com.hh.ehh.model.Profile;
+import com.hh.ehh.ui.splash.SplashActivity;
+import com.hh.ehh.utils.SharedPrefsConstants;
 
 
 public class ProfileFragment extends Fragment {
@@ -44,13 +52,10 @@ public class ProfileFragment extends Fragment {
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        if(dbProfile==null){
-            dbProfile = new Profile("1","Juan","Perez","juanperez@gmail.com","Lleida",null,"973234323");
-        }
-        //avatar.setImageDrawable(profile.getImageAsDrawable());
+        dbProfile = getArguments().getParcelable(PROFILE_KEY);
         name.setText(dbProfile.getName());
         mail.setText(dbProfile.getEmail());
-        city.setText(dbProfile.getLocation());
+        city.setText(dbProfile.getAddress());
        setHasOptionsMenu(true);
     }
 
@@ -64,41 +69,41 @@ public class ProfileFragment extends Fragment {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()){
             case R.id.refresh:
-//                logout();
+                logout();
                 break;
             default:
                 break;
         }
         return true;
     }
-    //UNCOMENT WHEN DB IS WORKING
-//    private void logout() {
-//        final AlertDialog.Builder licenceDialog = new AlertDialog.Builder(getActivity());
-//        licenceDialog.setTitle(getActivity().getResources().getString(R.string.warning));
-//        licenceDialog.setMessage(getActivity().getResources().getString(R.string.delete_warning)).setCancelable(false)
-//                .setPositiveButton(R.string.Accept, new DialogInterface.OnClickListener() {
-//                    @Override
-//                    public void onClick(DialogInterface dialog, int which) {
-//                        dialog.dismiss();
-//                        DataBaseSQLiteHelper dbHelper = DataBaseSQLiteHelper.newInstance(getActivity());
-//                        getActivity().deleteDatabase(dbHelper.getDatabaseName());
-//                        SharedPreferences sharedPreferences = getActivity().getSharedPreferences(SharedPrefsConstants.PREFS, Context.MODE_PRIVATE);
-//                        SharedPreferences.Editor editor = sharedPreferences.edit();
-//                        editor.clear().apply();
-//                        Intent intent = new Intent(getActivity(), SplashActivity.class);
-//                        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
-//                        startActivity(intent);
-//                        getActivity().finish();
-//                    }
-//                })
-//                .setNegativeButton(R.string.decline, new DialogInterface.OnClickListener() {
-//                    @Override
-//                    public void onClick(DialogInterface dialog, int which) {
-//                        dialog.dismiss();
-//                    }
-//                });
-//        licenceDialog.show();
-//    }
+
+    private void logout() {
+        final AlertDialog.Builder licenceDialog = new AlertDialog.Builder(getActivity());
+        licenceDialog.setTitle(getActivity().getResources().getString(R.string.warning));
+        licenceDialog.setMessage(getActivity().getResources().getString(R.string.delete_warning)).setCancelable(false)
+                .setPositiveButton(R.string.Accept, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                        DataBaseSQLiteHelper dbHelper = DataBaseSQLiteHelper.newInstance(getActivity());
+                        getActivity().deleteDatabase(dbHelper.getDatabaseName());
+                        SharedPreferences sharedPreferences = getActivity().getSharedPreferences(SharedPrefsConstants.PREFS, Context.MODE_PRIVATE);
+                        SharedPreferences.Editor editor = sharedPreferences.edit();
+                        editor.clear().apply();
+                        Intent intent = new Intent(getActivity(), SplashActivity.class);
+                        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                        startActivity(intent);
+                        getActivity().finish();
+                    }
+                })
+                .setNegativeButton(R.string.decline, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
+        licenceDialog.show();
+    }
 
 }
 

@@ -15,13 +15,13 @@ import java.util.EventListener;
 
 public class RestWebServiceConnection {
 
-    private static RestWebServiceConnection mConnection = null;
-    private RequestQueue mRequestQueue;
     private final static String BASE_URL = "http://alumnes-grp04.udl.cat";
     private final static String EHH_WEB = "/EHHWeb";
     private final static String REST = "/RestWSController";
     private final static String CENTERS = "/getMedicalCentersList";
     private final static String CENTER = "/getMedicalCenter/";
+    private static RestWebServiceConnection mConnection = null;
+    private RequestQueue mRequestQueue;
     private Context context;
 
 
@@ -47,35 +47,10 @@ public class RestWebServiceConnection {
         return mRequestQueue;
     }
 
-    public interface CustomListener<T> extends EventListener {
-        void onSucces(T response);
-
-        void onError(VolleyError error);
-    }
-
     /***********************************************************
      * GET
      ***********************************************************/
 
-    public void phoneNumberValidation(String number, final CustomListener<String> listener) {
-        if (mRequestQueue == null) {
-            mRequestQueue = Volley.newRequestQueue(context);
-        }
-        String url = "BASE_URL" + " / " + number;
-        StringRequest request = new StringRequest(url, new Response.Listener<String>() {
-            @Override
-            public void onResponse(String response) {
-                listener.onSucces(response);
-            }
-        }, new Response.ErrorListener() {
-
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                listener.onError(error);
-            }
-        });
-        mRequestQueue.add(request);
-    }
 
     public void getMedicalCentersList(final CustomListener<String> listener) {
         if (mRequestQueue == null) {
@@ -97,23 +72,9 @@ public class RestWebServiceConnection {
         mRequestQueue.add(request);
     }
 
-    public void getMedicalCenter(String id, final CustomListener<String> listener) {
-        if (mRequestQueue == null) {
-            mRequestQueue = Volley.newRequestQueue(context);
-        }
-        String url = BASE_URL + EHH_WEB + REST + CENTER +id;
-        StringRequest request = new StringRequest(url, new Response.Listener<String>() {
-            @Override
-            public void onResponse(String response) {
-                listener.onSucces(response);
-            }
-        }, new Response.ErrorListener() {
+    public interface CustomListener<T> extends EventListener {
+        void onSucces(T response);
 
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                listener.onError(error);
-            }
-        });
-        mRequestQueue.add(request);
+        void onError(VolleyError error);
     }
 }

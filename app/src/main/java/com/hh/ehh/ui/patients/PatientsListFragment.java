@@ -24,6 +24,7 @@ import com.hh.ehh.R;
 import com.hh.ehh.model.Patient;
 import com.hh.ehh.model.Profile;
 import com.hh.ehh.networking.SoapWebServiceConnection;
+import com.hh.ehh.ui.customdialogs.CustomDialogs;
 import com.hh.ehh.utils.FragmentStackManager;
 import com.hh.ehh.utils.xml.XMLHandler;
 import com.poliveira.parallaxrecyclerview.ParallaxRecyclerAdapter;
@@ -93,8 +94,12 @@ public class PatientsListFragment extends Fragment {
     }
 
     private void populateUI(Profile profile) {
-        getAllPatients = new GetAllPatients();
-        getAllPatients.execute(profile.getId());
+        if (SoapWebServiceConnection.checkInternetConnection(getActivity())) {
+            getAllPatients = new GetAllPatients();
+            getAllPatients.execute(profile.getId());
+        } else {
+            CustomDialogs.noInternetConnection(getActivity()).show();
+        }
     }
 
     private void fillAdapter(final List<Patient> patients) {
@@ -206,10 +211,6 @@ public class PatientsListFragment extends Fragment {
         @Override
         protected void onPostExecute(List<Patient> patientList) {
             super.onPostExecute(patientList);
-//          DELETE FOLLOWING MOCK LINES
-//            List<Patient> patients = patientList;
-//            patients.addAll(patientList);
-//            patients.addAll(patientList);
             if (patientList != null)
                 fillAdapter(patientList);
             if (dialog != null)

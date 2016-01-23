@@ -110,9 +110,7 @@ public class LocationService extends Service implements
 
     private void startTracking() {
         Log.d(TAG, "startTracking");
-
         if (GooglePlayServicesUtil.isGooglePlayServicesAvailable(this) == ConnectionResult.SUCCESS) {
-
             googleApiClient = new GoogleApiClient.Builder(this)
                     .addApi(LocationServices.API)
                     .addConnectionCallbacks(this)

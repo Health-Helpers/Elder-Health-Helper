@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Elder Health Helper</string>
-    <string name="welcomeMsg">Bienvenido</string>
-    <string name="check_number">Comprobando su número</string>
-    <string name="phone_number">654321123</string>
+    <string name="welcomeMsg">Bienvenido a Elder Health Helper</string>
+    <string name="check_data">Comprobando datos…</string>
 
     <string name="closeDrawer">Navigation View</string>
     <string name="openDrawer">Navigation View Closed</string>
@@ -50,6 +49,14 @@
     <string name="wrong_surnames">El campo apellidos no puede estar vacío.</string>
     <string name="wrong_phone">El campo telefono debe tener almenos 9 dígitos.</string>
     <string name="wrong_address">El campo dirección no puede estar vacío.</string>
+    <string name="wrong_disease">El campo enfermedad no puede estar vacío.</string>
+    <string name="birthday_header">Fecha de nacimiento</string>
+    <string name="wrong_date">fecha incorrecta</string>
+    <string name="wrong_date_text">Las fechas futuras no son validas.</string>
+    <string name="wrong_birthday">El campo fecha de nacimiento no puede estar vacío.</string>
+    <string name="low">Bajo</string>
+    <string name="mid">Medio</string>
+    <string name="high">Alto</string>
 
     <!-- Dialogs -->
     <string name="loading">Cargando…</string>
@@ -67,13 +74,29 @@
 
     <!-- News-->
     <string name="news">Notícias</string>
-    <string name="wrong_disease">El campo enfermedad no puede estar vacío.</string>
-    <string name="birthday_header">Fecha de nacimiento</string>
-    <string name="wrong_date">Wrong date</string>
-    <string name="wrong_date_text">Future date is not allowed here.</string>
-    <string name="wrong_birthday">El campo fecha de nacimiento no puede estar vacío.</string>
-    <string name="low">Low</string>
-    <string name="mid">Medium</string>
-    <string name="high">High</string>
+
+    <!-- PATIENT LOCATION -->
+    <string name="last_seen">Última posición:</string>
+
+    <!-- REGISTER-->
+    <string name="register_header">Para empezar a utilizar la aplicación del responsable, introduzca el DNI y el teléfono que nos facilitó en el momento de su registro en nuestra web. En cualquier caso, usted puede ponerse en contacto con nosotros. Gracias.</string>
+    <string name="wrong_register_header">Error de login</string>
+    <string name="wrong_register">Un error sucedió mientras se intentava hace login. Porfavor, inténtelo dentro de 5 minutos. En cualquier caso no dude en contactar con nosotros</string>
+    <string name="contact">Contactar</string>
+    <string name="phone_num">123123123</string>
+
+    <!-- SETTINGS -->
+    <string name="about_comp">Acerca de EHH</string>
+    <string name="accessibility">Accesibilidad</string>
+    <string name="about">Acerca de…</string>
+    <string name="features">Herramientas</string>
+    <string name="enterprise_email">ehh.healthhelper@gmail.com</string>
+    <string name="enterprise_phone">973010203</string>
+    <string name="enterprise_link">http://alumnes-grp04.udl.cat/EHHWeb</string>
+    <string name="enterprise_address">Avda. Jaume II 69</string>
+
+    <!-- LOGOUT ALERT-->
+    <string name="warning">Alerta</string>
+    <string name="delete_warning">Si continua todos los datos de la APP será borrados.</string>
 
 </resources>

@@ -2,8 +2,11 @@ package com.hh.ehh.utils.xml;
 
 import android.util.Xml;
 
+import com.google.android.gms.maps.model.LatLng;
 import com.hh.ehh.model.Geofence;
 import com.hh.ehh.model.Patient;
+import com.hh.ehh.model.Position;
+import com.hh.ehh.model.Profile;
 import com.hh.ehh.model.User;
 
 import org.xmlpull.v1.XmlPullParser;
@@ -32,6 +35,14 @@ public class XMLHandler {
     private static final String PATIENT = "patient";
     private static final String PATIENTS = "patients";
     private static final String PATIENT_HEAD = "getResponsiblePatientsResponse";
+    private static final String LOCATION_HEAD = "getPatientLocationResponse";
+    private static final String LOCATION = "location";
+    private static final String PROFILE_HEAD = "createUserResponse";
+    private static final String PROFILE = "user";
+    private static final String USERID = "userId";
+    private static final String DATE = "date";
+    private static final String LATITUDE = "latitude";
+    private static final String LONGITUDE = "longitude";
 
     private static final String GEOFENCE_RESPONSE_HEAD = "getPatientGeofenceResponse";
     private static final String GEOFENCES = "geofences";
@@ -46,16 +57,9 @@ public class XMLHandler {
 
     private static XmlPullParserFactory xmlFactoryObject;
 
-    public static Patient getPatientFromXML(String stringXML) throws XmlPullParserException, IOException {
-        InputStream stream = new ByteArrayInputStream(stringXML.getBytes(ENCODING));
-        xmlFactoryObject = XmlPullParserFactory.newInstance();
-        XmlPullParser myParser = xmlFactoryObject.newPullParser();
-        myParser.setFeature(XmlPullParser.FEATURE_PROCESS_NAMESPACES, false);
-        myParser.setInput(stream, null);
-        Patient patient = parsePatient(myParser);
-        stream.close();
-        return patient;
-    }
+    /********************************************************************************
+     * Geofences
+     *******************************************************************************/
 
     public static List<Geofence> getPatientGeofences(String stringXML) throws XmlPullParserException, IOException {
         InputStream stream = new ByteArrayInputStream(stringXML.getBytes(ENCODING));
@@ -69,21 +73,6 @@ public class XMLHandler {
             stream.close();
         }
     }
-
-
-    public static List<Patient> getResponsiblePatients(String stringXML) throws XmlPullParserException, IOException {
-        InputStream stream = new ByteArrayInputStream(stringXML.getBytes(ENCODING));
-        try {
-            XmlPullParser parser = Xml.newPullParser();
-            parser.setFeature(XmlPullParser.FEATURE_PROCESS_NAMESPACES, true);
-            parser.setInput(stream, null);
-            parser.nextTag();
-            return parsePatients(parser);
-        } finally {
-            stream.close();
-        }
-    }
-
     private static List<Geofence> parseGeofences(XmlPullParser parser)
             throws XmlPullParserException, IOException {
 
@@ -100,7 +89,6 @@ public class XMLHandler {
             String tagName = parser.getName();
             if (tagName.equals(GEOFENCES)) {
                 readGeofences(parser,geofenceList);
-//                patientList.add(readPatient(parser));
 
             } else {
                 skipTag(parser);
@@ -124,41 +112,6 @@ public class XMLHandler {
         }
     }
 
-    private static List<Patient> parsePatients(XmlPullParser parser)
-            throws XmlPullParserException, IOException {
-        final String ns = "";
-        List<Patient> patientList = new ArrayList<Patient>();
-        parser.require(XmlPullParser.START_TAG, ns, PATIENT_HEAD);
-        while (parser.next() != XmlPullParser.END_TAG) {
-            if (parser.getEventType() != XmlPullParser.START_TAG) {
-                continue;
-            }
-            String tagName = parser.getName();
-            if (tagName.equals(PATIENTS)) {
-                readPatients(parser, patientList);
-//                patientList.add(readPatient(parser));
-
-            } else {
-                skipTag(parser);
-            }
-        }
-        return patientList;
-    }
-
-    private static void readPatients(XmlPullParser parser, List<Patient> patientList) throws IOException, XmlPullParserException {
-        while (parser.next() != XmlPullParser.END_TAG) {
-            if (parser.getEventType() != XmlPullParser.START_TAG) {
-                continue;
-            }
-            String tagName = parser.getName();
-            if (tagName.equals(PATIENT)) {
-                patientList.add(readPatient(parser));
-
-            } else {
-                skipTag(parser);
-            }
-        }
-    }
 
     private static Geofence readGeofence(XmlPullParser parser) throws IOException, XmlPullParserException {
 
@@ -192,6 +145,57 @@ public class XMLHandler {
         }
 
         return geofence;
+    }
+
+    /********************************************************************************
+     * PATIENTS
+     *******************************************************************************/
+    public static List<Patient> getResponsiblePatients(String stringXML) throws XmlPullParserException, IOException {
+        InputStream stream = new ByteArrayInputStream(stringXML.getBytes(ENCODING));
+        try {
+            XmlPullParser parser = Xml.newPullParser();
+            parser.setFeature(XmlPullParser.FEATURE_PROCESS_NAMESPACES, true);
+            parser.setInput(stream, null);
+            parser.nextTag();
+            return parsePatients(parser);
+        } finally {
+            stream.close();
+        }
+    }
+
+    private static List<Patient> parsePatients(XmlPullParser parser)
+            throws XmlPullParserException, IOException {
+        final String ns = "";
+        List<Patient> patientList = new ArrayList<>();
+        parser.require(XmlPullParser.START_TAG, ns, PATIENT_HEAD);
+        while (parser.next() != XmlPullParser.END_TAG) {
+            if (parser.getEventType() != XmlPullParser.START_TAG) {
+                continue;
+            }
+            String tagName = parser.getName();
+            if (tagName.equals(PATIENTS)) {
+                readPatients(parser, patientList);
+
+            } else {
+                skipTag(parser);
+            }
+        }
+        return patientList;
+    }
+
+    private static void readPatients(XmlPullParser parser, List<Patient> patientList) throws IOException, XmlPullParserException {
+        while (parser.next() != XmlPullParser.END_TAG) {
+            if (parser.getEventType() != XmlPullParser.START_TAG) {
+                continue;
+            }
+            String tagName = parser.getName();
+            if (tagName.equals(PATIENT)) {
+                patientList.add(readPatient(parser));
+
+            } else {
+                skipTag(parser);
+            }
+        }
     }
 
     private static Patient readPatient(XmlPullParser parser) throws IOException, XmlPullParserException {
@@ -279,26 +283,147 @@ public class XMLHandler {
         }
     }
 
-    private static Patient parsePatient(XmlPullParser myParser) {
-        int event;
-        Patient patient;
-        String text = null;
-        User.UserBuilder builder = new User.UserBuilder();
-        String disease = null;
-        String dependencyGrade = null;
+    /********************************************************************************
+     *
+     *                          LOCATION
+     *
+     *******************************************************************************/
+    public static Position getPatientLocation(String rawResponse) throws IOException, XmlPullParserException {
+        InputStream stream = new ByteArrayInputStream(rawResponse.getBytes(ENCODING));
         try {
-            event = myParser.getEventType();
+            XmlPullParser parser = Xml.newPullParser();
+            parser.setFeature(XmlPullParser.FEATURE_PROCESS_NAMESPACES, true);
+            parser.setInput(stream, null);
+            parser.nextTag();
+            return parseLocation(parser);
+        } finally {
+            stream.close();
+        }
+    }
+
+    private static Position parseLocation(XmlPullParser parser) throws IOException, XmlPullParserException {
+        final String ns = "";
+        Position position = null;
+        parser.require(XmlPullParser.START_TAG, ns, LOCATION_HEAD);
+        while (parser.next() != XmlPullParser.END_TAG) {
+            if (parser.getEventType() != XmlPullParser.START_TAG) {
+                continue;
+            }
+            String tagName = parser.getName();
+            if (tagName.equals(LOCATION)) {
+                position = readLocation(parser);
+                break;
+
+            } else {
+                skipTag(parser);
+            }
+        }
+        return position;
+    }
+
+    private static Position readLocation(XmlPullParser parser) throws IOException, XmlPullParserException {
+        final String ns = "";
+        String latitude = null, longitude = null, date = null;
+        parser.require(XmlPullParser.START_TAG, ns, LOCATION);
+        int event;
+        String text = null;
+        try {
+            event = parser.getEventType();
             while (event != XmlPullParser.END_DOCUMENT) {
-                String name = myParser.getName();
+                String name = parser.getName();
                 switch (event) {
                     case XmlPullParser.START_TAG:
                         break;
                     case XmlPullParser.TEXT:
-                        text = myParser.getText();
+                        text = parser.getText();
                         break;
                     case XmlPullParser.END_TAG:
                         switch (name) {
-                            case ID_PATIENT:
+                            case DATE:
+                                date = text;
+                                break;
+                            case LATITUDE:
+                                latitude = text;
+                                break;
+                            case LONGITUDE:
+                                longitude = text;
+                                break;
+                            default:
+                                break;
+                        }
+                        break;
+                }
+                event = parser.next();
+            }
+        } catch (IOException | XmlPullParserException e) {
+            e.printStackTrace();
+        }
+        Position position = null;
+        if (latitude != null && longitude != null && date != null) {
+            position = new Position(new LatLng(
+                    Double.parseDouble(latitude),
+                    Double.parseDouble(longitude)
+            ), date);
+        }
+        return position;
+    }
+
+    /********************************************************************************
+     * PROFILE
+     *******************************************************************************/
+
+    public static Profile getProfile(String rawResponse) throws IOException, XmlPullParserException {
+        InputStream stream = new ByteArrayInputStream(rawResponse.getBytes(ENCODING));
+        try {
+            XmlPullParser parser = Xml.newPullParser();
+            parser.setFeature(XmlPullParser.FEATURE_PROCESS_NAMESPACES, true);
+            parser.setInput(stream, null);
+            parser.nextTag();
+            return parseProfile(parser);
+        } finally {
+            stream.close();
+        }
+    }
+
+    private static Profile parseProfile(XmlPullParser parser) throws IOException, XmlPullParserException {
+        final String ns = "";
+        Profile profile = null;
+        parser.require(XmlPullParser.START_TAG, ns, PROFILE_HEAD);
+        while (parser.next() != XmlPullParser.END_TAG) {
+            if (parser.getEventType() != XmlPullParser.START_TAG) {
+                continue;
+            }
+            String tagName = parser.getName();
+            if (tagName.equals(PROFILE)) {
+                profile = readProfile(parser);
+                break;
+
+            } else {
+                skipTag(parser);
+            }
+        }
+        return profile;
+    }
+
+    private static Profile readProfile(XmlPullParser parser) throws IOException, XmlPullParserException {
+        final String ns = "";
+        parser.require(XmlPullParser.START_TAG, ns, PROFILE);
+        User.UserBuilder builder = new User.UserBuilder();
+        int event;
+        String text = null;
+        try {
+            event = parser.getEventType();
+            while (event != XmlPullParser.END_DOCUMENT) {
+                String name = parser.getName();
+                switch (event) {
+                    case XmlPullParser.START_TAG:
+                        break;
+                    case XmlPullParser.TEXT:
+                        text = parser.getText();
+                        break;
+                    case XmlPullParser.END_TAG:
+                        switch (name) {
+                            case USERID:
                                 builder.setId(text);
                                 break;
                             case ID_DOC:
@@ -319,24 +444,25 @@ public class XMLHandler {
                             case PHONE:
                                 builder.setPhone(text);
                                 break;
-                            case DISEASE:
-                                disease = text;
-                                break;
-                            case DEPGRADE:
-                                dependencyGrade = text;
-                                break;
                         }
                         break;
                 }
-                event = myParser.next();
+                event = parser.next();
             }
         } catch (IOException | XmlPullParserException e) {
             e.printStackTrace();
         }
-        patient = new Patient(builder.build());
-        patient.setDiseases(disease);
-        patient.setDependencyGrade(dependencyGrade);
-        return patient;
+        User user = builder.build();
+        return new Profile(
+                user.getId(),
+                user.getIdDoc(),
+                user.getName(),
+                user.getSurname(),
+                "marc@gmail.com",
+                user.getAddress(),
+                "",
+                user.getPhone()
+        );
     }
 }
 

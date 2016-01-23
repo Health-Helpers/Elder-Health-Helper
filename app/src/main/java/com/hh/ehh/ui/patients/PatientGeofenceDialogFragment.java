@@ -3,9 +3,9 @@ package com.hh.ehh.ui.patients;
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
-import android.location.Location;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AlertDialog;
 import android.util.Log;
@@ -18,8 +18,6 @@ import com.hh.ehh.model.Geofence;
 import com.hh.ehh.model.Patient;
 import com.hh.ehh.networking.SoapWebServiceConnection;
 
-import java.util.Date;
-
 /**
  * Created by ivanjosa on 15/1/16.
  */
@@ -30,9 +28,8 @@ public class PatientGeofenceDialogFragment extends DialogFragment {
     public double latitude;
 
     public double longitude;
-    private EditText radiusInput;
     public Patient patient;
-
+    private EditText radiusInput;
 
     public static PatientGeofenceDialogFragment newInstance(Patient patient) {
         PatientGeofenceDialogFragment patientGeofenceDialogFragment = new PatientGeofenceDialogFragment();
@@ -42,13 +39,13 @@ public class PatientGeofenceDialogFragment extends DialogFragment {
         return patientGeofenceDialogFragment;
     }
 
+    @NonNull
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         LayoutInflater inflater = getActivity().getLayoutInflater();
 
         //TODO: Read existent geofences
-
 
         final Patient patient = getArguments().getParcelable(ARG_PATIENT_NUMBER);
         this.patient = patient;
@@ -81,7 +78,14 @@ public class PatientGeofenceDialogFragment extends DialogFragment {
         this.longitude = longitude;
     }
 
+    private void sendGeofenceDataToWebsite(Geofence geofence) {
+        if (SoapWebServiceConnection.checkInternetConnection(getActivity())) {
+            SoapWebServiceConnection soapWebServiceConnection = SoapWebServiceConnection.getInstance(getActivity());
 
+            SaveGeofence postGeofence = new SaveGeofence(soapWebServiceConnection, geofence, this.patient);
+            postGeofence.execute(geofence);
+        }
+    }
 
     private class DialogPositiveClickListener implements DialogInterface.OnClickListener{
 
@@ -99,8 +103,7 @@ public class PatientGeofenceDialogFragment extends DialogFragment {
 
         @Override
         public void onClick(DialogInterface dialog, int id) {
-            int radius = Integer.parseInt(radiusInput.getText().toString());
-            this.radius = radius;
+            this.radius = Integer.parseInt(radiusInput.getText().toString());
             Log.d("Log",String.valueOf(this.radius));
             Log.d("Log",String.valueOf(this.longitude));
             Log.d("Log",String.valueOf(this.latitude));
@@ -113,21 +116,12 @@ public class PatientGeofenceDialogFragment extends DialogFragment {
         }
     }
 
-    private void sendGeofenceDataToWebsite(Geofence geofence) {
-        if (SoapWebServiceConnection.checkInternetConnection(getActivity())) {
-            SoapWebServiceConnection soapWebServiceConnection = SoapWebServiceConnection.getInstance(getActivity());
-
-            SaveGeofence postGeofence = new SaveGeofence(soapWebServiceConnection,geofence,this.patient);
-            postGeofence.execute(geofence);
-         }
-    }
-
     private class SaveGeofence extends AsyncTask<Geofence, Void, Void> {
 
+        Patient patient;
         private SoapWebServiceConnection soapWebServiceConnection;
         private Geofence geofence;
         private ProgressDialog dialog;
-        Patient patient;
 
 
         public SaveGeofence(SoapWebServiceConnection soapWebServiceConnection, Geofence geofence,Patient patient) {

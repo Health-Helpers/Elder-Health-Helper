@@ -1,0 +1,12 @@
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <PreferenceCategory android:title="@string/features">
+        <EditTextPreference
+            android:key="ACCESSIBILITY"
+            android:title="@string/accessibility" />
+    </PreferenceCategory>
+    <PreferenceCategory android:title="@string/about">
+        <Preference
+            android:key="ABOUT"
+            android:title="@string/about_comp" />
+    </PreferenceCategory>
+</PreferenceScreen>

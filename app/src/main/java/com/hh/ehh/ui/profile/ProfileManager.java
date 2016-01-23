@@ -11,10 +11,11 @@ import com.hh.ehh.utils.StateListener;
  */
 public class ProfileManager {
 
+    private final StateListener stateListenner;
     private SQLiteDatabase database;
     private Context context;
-    private final StateListener stateListenner;
 
+//    TODO add profile image management.
 
     public ProfileManager(SQLiteDatabase database, Context context,StateListener listenner) {
         this.database = database;

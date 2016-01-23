@@ -17,11 +17,12 @@ public class ProfileDatabaseManager {
     public static void saveProfile(Profile profile, SQLiteDatabase sqLiteDatabase) {
         profileValues = new ContentValues();
         profileValues.put(ProfileTable.Cols.ID, profile.getId());
+        profileValues.put(ProfileTable.Cols.IDDOC, profile.getIdDoc());
         profileValues.put(ProfileTable.Cols.NAME, profile.getName());
         profileValues.put(ProfileTable.Cols.SURNAME, profile.getSurname());
         profileValues.put(ProfileTable.Cols.EMAIL, profile.getEmail());
         profileValues.put(ProfileTable.Cols.PHONE, profile.getPhone());
-        profileValues.put(ProfileTable.Cols.ADDRESS, profile.getLocation());
+        profileValues.put(ProfileTable.Cols.ADDRESS, profile.getAddress());
         profileValues.put(ProfileTable.Cols.IMAGE, profile.getImagePath());
         sqLiteDatabase.insert(ProfileTable.TABLE_NAME, null, profileValues);
     }
@@ -61,9 +62,9 @@ public class ProfileDatabaseManager {
                         new String[]{dbPRofile.getId()}
                 );
             }
-            if (!dbPRofile.getLocation().equals(profile.getLocation())) {
+            if (!dbPRofile.getAddress().equals(profile.getAddress())) {
                 profileValues = new ContentValues();
-                profileValues.put(ProfileTable.Cols.EMAIL, profile.getLocation());
+                profileValues.put(ProfileTable.Cols.EMAIL, profile.getAddress());
 
                 sqLiteDatabase.update(
                         ProfileTable.TABLE_NAME,
@@ -106,6 +107,7 @@ public class ProfileDatabaseManager {
             cursor.moveToFirst();
             profile = new Profile(
                     String.valueOf(cursor.getInt(cursor.getColumnIndex(ProfileTable.Cols.ID))),
+                    String.valueOf(cursor.getInt(cursor.getColumnIndex(ProfileTable.Cols.IDDOC))),
                     cursor.getString(cursor.getColumnIndex(ProfileTable.Cols.NAME)),
                     cursor.getString(cursor.getColumnIndex(ProfileTable.Cols.SURNAME)),
                     cursor.getString(cursor.getColumnIndex(ProfileTable.Cols.EMAIL)),

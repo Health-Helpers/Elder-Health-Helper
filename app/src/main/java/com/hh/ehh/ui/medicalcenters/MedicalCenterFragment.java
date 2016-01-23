@@ -8,7 +8,6 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
@@ -81,11 +80,9 @@ public class MedicalCenterFragment extends Fragment {
                                 new LatLng(Double.parseDouble(medicalCenter.getLatitude()),
                                         Double.parseDouble(medicalCenter.getLongitude())))
                         .title(medicalCenter.getName()));
-                CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(new LatLng(
+                map.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(
                         Double.parseDouble(medicalCenter.getLatitude()),
-                        Double.parseDouble(medicalCenter.getLongitude())
-                ), 20);
-                map.animateCamera(cameraUpdate);
+                        Double.parseDouble(medicalCenter.getLongitude())), 17));
                 name.setText(medicalCenter.getName());
                 phone.setText(medicalCenter.getPhone());
                 address.setText(medicalCenter.getAddress());
